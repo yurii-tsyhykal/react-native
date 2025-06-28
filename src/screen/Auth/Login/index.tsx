@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import styles from './styles';
+import {NotVisibleIcon, VisibleIcon} from '../../../assets/icons';
 
 interface InputValue {
   email: string;
@@ -19,6 +20,7 @@ interface InputValue {
 }
 
 export default function LoginPage() {
+  const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const [inputValues, setInputValues] = useState<InputValue>({
     email: '',
     password: '',
@@ -35,7 +37,7 @@ export default function LoginPage() {
 
   const checkEmail = () => {
     const emailValidator = new RegExp(
-      '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/',
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,
     );
     if (!emailValidator.test(inputValues.email)) {
       handleChangeInput('errorEmail', 'Not valid email');
@@ -52,14 +54,20 @@ export default function LoginPage() {
     }
   };
 
+  const isDisabledLoginBtn = Boolean(
+    inputValues.errorEmail ||
+      inputValues.errorPassword ||
+      !inputValues.email ||
+      !inputValues.password,
+  );
+
   return (
     <KeyboardAvoidingView
       style={styles.mainWrapper}
       keyboardVerticalOffset={Platform.select({android: 20, ios: 90})}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View
-          style={styles.contentWrapper}>
+        <View style={styles.contentWrapper}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Раді тебе вітати!</Text>
             <Text style={styles.welcomeText}>
@@ -81,9 +89,9 @@ export default function LoginPage() {
                 placeholder="Email"
                 style={styles.input}
                 placeholderTextColor={'#838383'}
+                onBlur={() => checkEmail()}
                 value={inputValues.email}
                 onChangeText={text => handleChangeInput('email', text)}
-                onBlur={() => checkEmail()}
               />
             </View>
             {inputValues.errorEmail && <Text>{inputValues.errorEmail}</Text>}
@@ -97,14 +105,26 @@ export default function LoginPage() {
                   handleChangeInput('password', text);
                   checkPassword(text);
                 }}
-                secureTextEntry={true}
+                secureTextEntry={!isVisiblePassword}
               />
+              <TouchableOpacity
+                onPress={() => setIsVisiblePassword(!isVisiblePassword)}
+                hitSlop={15}
+              >
+                {isVisiblePassword ? <VisibleIcon fill={'black'}/> : <NotVisibleIcon fill={'black'} />}
+              </TouchableOpacity>
             </View>
             {inputValues.errorPassword && (
               <Text>{inputValues.errorPassword}</Text>
             )}
           </View>
-          <TouchableOpacity style={styles.loginBtnContainer}>
+          <TouchableOpacity
+            style={[
+              styles.loginBtnContainer,
+              // eslint-disable-next-line react-native/no-inline-styles
+              isDisabledLoginBtn && {opacity: 0.5},
+            ]}
+            disabled={isDisabledLoginBtn}>
             <Text style={styles.loginText}>Увійти</Text>
           </TouchableOpacity>
         </View>

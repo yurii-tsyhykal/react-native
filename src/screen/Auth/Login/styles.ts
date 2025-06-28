@@ -55,7 +55,18 @@ export default StyleSheet.create({
       default: 12,
     }),
     paddingHorizontal: 24,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
+  // NotVisiblePasswordBtn: {
+  //   width: 15,
+  //   height: 15,
+  //   backgroundColor: 'green',
+  // },
+  // visiblePasswordBtn: {
+  //   backgroundColor: 'red',
+  // },
   formContainer: {
     marginTop: 28,
     marginBottom: 68,
