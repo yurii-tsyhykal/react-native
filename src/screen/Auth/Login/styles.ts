@@ -2,12 +2,12 @@ import {Platform, StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   mainWrapper: {
-    margin: 30,
-    marginTop: Platform.select({
-      android: 90,
-      ios: 70,
-      default: 70,
-    }),
+    flex: 1,
+  },
+  contentWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 30,
   },
   title: {
     fontSize: 24,

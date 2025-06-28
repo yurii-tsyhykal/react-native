@@ -1,10 +1,11 @@
 import React from 'react';
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {View} from 'react-native';
 import LoginPage from './src/screen/Auth/Login';
 
 function App(): React.JSX.Element {
   return (
-    <View>
+    // eslint-disable-next-line react-native/no-inline-styles
+    <View style={{flex: 1}}>
       <LoginPage />
     </View>
   );
