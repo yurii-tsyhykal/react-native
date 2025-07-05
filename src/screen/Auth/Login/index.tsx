@@ -109,9 +109,12 @@ export default function LoginPage() {
               />
               <TouchableOpacity
                 onPress={() => setIsVisiblePassword(!isVisiblePassword)}
-                hitSlop={15}
-              >
-                {isVisiblePassword ? <VisibleIcon fill={'black'}/> : <NotVisibleIcon fill={'black'} />}
+                hitSlop={15}>
+                {isVisiblePassword ? (
+                  <VisibleIcon fill={'black'} />
+                ) : (
+                  <NotVisibleIcon fill={'black'} />
+                )}
               </TouchableOpacity>
             </View>
             {inputValues.errorPassword && (

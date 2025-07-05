@@ -1,4 +1,5 @@
 import {Platform, StyleSheet} from 'react-native';
+import {fonts} from '../../../constants/fonts';
 
 export default StyleSheet.create({
   mainWrapper: {
@@ -12,10 +13,12 @@ export default StyleSheet.create({
   title: {
     fontSize: 24,
     color: 'black',
+    fontFamily: fonts.ComfortaaRegular,
   },
   welcomeText: {
-    fontSize: 14,
+    fontSize: 17,
     color: 'black',
+    fontFamily: fonts.MontserratRegular,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -59,14 +62,6 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  // NotVisiblePasswordBtn: {
-  //   width: 15,
-  //   height: 15,
-  //   backgroundColor: 'green',
-  // },
-  // visiblePasswordBtn: {
-  //   backgroundColor: 'red',
-  // },
   formContainer: {
     marginTop: 28,
     marginBottom: 68,

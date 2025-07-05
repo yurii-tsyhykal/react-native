@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import LoginPage from './src/screen/Auth/Login';
 
 function App(): React.JSX.Element {
+  console.log('request', fetch('https://google.com'));
   return (
     // eslint-disable-next-line react-native/no-inline-styles
     <View style={{flex: 1}}>
