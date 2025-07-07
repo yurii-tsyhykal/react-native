@@ -4,13 +4,13 @@ import {
   KeyboardAvoidingView,
   Platform,
   Text,
-  TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import styles from './styles';
-import {NotVisibleIcon, VisibleIcon} from '../../../assets/icons';
+import DefaultBtn from '../../../common/components/DefaultBtn';
+import Input from '../../../common/components/Input';
+import styles from '../styles';
 
 interface InputValue {
   email: string;
@@ -20,7 +20,6 @@ interface InputValue {
 }
 
 export default function LoginPage() {
-  const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const [inputValues, setInputValues] = useState<InputValue>({
     email: '',
     password: '',
@@ -84,52 +83,29 @@ export default function LoginPage() {
             </TouchableOpacity>
           </View>
           <View style={styles.formContainer}>
-            <View style={styles.inputContainer}>
-              <TextInput
-                placeholder="Email"
-                style={styles.input}
-                placeholderTextColor={'#838383'}
-                onBlur={() => checkEmail()}
-                value={inputValues.email}
-                onChangeText={text => handleChangeInput('email', text)}
-              />
-            </View>
-            {inputValues.errorEmail && <Text>{inputValues.errorEmail}</Text>}
-            <View style={styles.inputContainer}>
-              <TextInput
-                placeholder="Password"
-                style={styles.input}
-                placeholderTextColor={'#838383'}
-                value={inputValues.password}
-                onChangeText={text => {
-                  handleChangeInput('password', text);
-                  checkPassword(text);
-                }}
-                secureTextEntry={!isVisiblePassword}
-              />
-              <TouchableOpacity
-                onPress={() => setIsVisiblePassword(!isVisiblePassword)}
-                hitSlop={15}>
-                {isVisiblePassword ? (
-                  <VisibleIcon fill={'black'} />
-                ) : (
-                  <NotVisibleIcon fill={'black'} />
-                )}
-              </TouchableOpacity>
-            </View>
-            {inputValues.errorPassword && (
-              <Text>{inputValues.errorPassword}</Text>
-            )}
+            <Input
+              placeholder="Email"
+              onBlur={checkEmail}
+              value={inputValues.email}
+              onChangeText={text => handleChangeInput('email', text)}
+              error={inputValues.errorEmail}
+            />
+            <Input
+              placeholder="Password"
+              value={inputValues.password}
+              onChangeText={text => {
+                handleChangeInput('password', text);
+                checkPassword(text);
+              }}
+              secureTextEntry={true}
+              error={inputValues.errorPassword && inputValues.errorPassword}
+            />
           </View>
-          <TouchableOpacity
-            style={[
-              styles.loginBtnContainer,
-              // eslint-disable-next-line react-native/no-inline-styles
-              isDisabledLoginBtn && {opacity: 0.5},
-            ]}
-            disabled={isDisabledLoginBtn}>
-            <Text style={styles.loginText}>Увійти</Text>
-          </TouchableOpacity>
+          <DefaultBtn
+            onPress={() => {}}
+            disabled={isDisabledLoginBtn}
+            text="Увійти"
+          />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
