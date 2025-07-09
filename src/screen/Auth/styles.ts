@@ -1,5 +1,6 @@
 import {Platform, StyleSheet} from 'react-native';
-import {fonts} from '../../../constants/fonts';
+import { fonts } from '../../constants/fonts';
+
 
 export default StyleSheet.create({
   mainWrapper: {
@@ -28,7 +29,7 @@ export default StyleSheet.create({
     borderRadius: 20,
     marginTop: 32,
   },
-  loginBtn: {
+  activeTab: {
     alignItems: 'center',
     backgroundColor: '#F8F8F9',
     padding: 10,
@@ -39,10 +40,11 @@ export default StyleSheet.create({
     fontSize: 14,
     color: '#0B0B0B',
   },
-  registerBtn: {
+  disabledTab: {
     alignItems: 'center',
     padding: 10,
     borderRadius: 20,
+    opacity: 0.7,
     flex: 1,
   },
   titleContainer: {
@@ -69,7 +71,7 @@ export default StyleSheet.create({
   input: {
     padding: 0,
   },
-  loginBtnContainer: {
+  activeTabContainer: {
     backgroundColor: '#7A71BA',
     borderRadius: 25,
     paddingVertical: 12,

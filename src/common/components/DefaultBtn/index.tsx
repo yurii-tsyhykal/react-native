@@ -18,7 +18,7 @@ export default function DefaultBtn({
       onPress={onPress}
       disabled={disabled}
       style={[
-        styles.loginBtnContainer,
+        styles.activeTabContainer,
         // eslint-disable-next-line react-native/no-inline-styles
         disabled && {opacity: 0.5},
       ]}>

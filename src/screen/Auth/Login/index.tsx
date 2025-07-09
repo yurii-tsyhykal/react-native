@@ -1,13 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import {View} from 'react-native';
 import DefaultBtn from '../../../common/components/DefaultBtn';
 import Input from '../../../common/components/Input';
 import styles from '../styles';
@@ -53,7 +45,7 @@ export default function LoginPage() {
     }
   };
 
-  const isDisabledLoginBtn = Boolean(
+  const isDisabledactiveTab = Boolean(
     inputValues.errorEmail ||
       inputValues.errorPassword ||
       !inputValues.email ||
@@ -61,53 +53,31 @@ export default function LoginPage() {
   );
 
   return (
-    <KeyboardAvoidingView
-      style={styles.mainWrapper}
-      keyboardVerticalOffset={Platform.select({android: 20, ios: 90})}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.contentWrapper}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Раді тебе вітати!</Text>
-            <Text style={styles.welcomeText}>
-              Кожен пухнастик заслуговує на дбайливих господарів. Ми допоможемо
-              тобі знайти друга.
-            </Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.loginBtn}>
-              <Text style={styles.authText}>Вхід</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.registerBtn}>
-              <Text style={styles.authText}>Реєстрація</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.formContainer}>
-            <Input
-              placeholder="Email"
-              onBlur={checkEmail}
-              value={inputValues.email}
-              onChangeText={text => handleChangeInput('email', text)}
-              error={inputValues.errorEmail}
-            />
-            <Input
-              placeholder="Password"
-              value={inputValues.password}
-              onChangeText={text => {
-                handleChangeInput('password', text);
-                checkPassword(text);
-              }}
-              secureTextEntry={true}
-              error={inputValues.errorPassword && inputValues.errorPassword}
-            />
-          </View>
-          <DefaultBtn
-            onPress={() => {}}
-            disabled={isDisabledLoginBtn}
-            text="Увійти"
-          />
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    <>
+      <View style={styles.formContainer}>
+        <Input
+          placeholder="Email"
+          onBlur={checkEmail}
+          value={inputValues.email}
+          onChangeText={text => handleChangeInput('email', text)}
+          error={inputValues.errorEmail}
+        />
+        <Input
+          placeholder="Password"
+          value={inputValues.password}
+          onChangeText={text => {
+            handleChangeInput('password', text);
+            checkPassword(text);
+          }}
+          secureTextEntry={true}
+          error={inputValues.errorPassword && inputValues.errorPassword}
+        />
+      </View>
+      <DefaultBtn
+        onPress={() => {}}
+        disabled={isDisabledactiveTab}
+        text="Увійти"
+      />
+    </>
   );
 }
