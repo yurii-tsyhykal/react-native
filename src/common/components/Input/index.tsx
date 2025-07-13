@@ -42,16 +42,16 @@ export default function Input({
           onFocus={onFocus}
           value={value}
           onChangeText={text => onChangeText(text)}
-          secureTextEntry={!isVisiblePassword}
+          secureTextEntry={isVisiblePassword}
         />
         {secureTextEntry && (
           <TouchableOpacity
             onPress={() => setIsVisiblePassword(!isVisiblePassword)}
             hitSlop={15}>
             {isVisiblePassword ? (
-              <VisibleIcon fill={'#000000'} />
-            ) : (
               <NotVisibleIcon fill={'#000000'} />
+            ) : (
+              <VisibleIcon fill={'#000000'} />
             )}
           </TouchableOpacity>
         )}
