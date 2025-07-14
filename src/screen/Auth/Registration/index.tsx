@@ -19,7 +19,7 @@ export default function Registration() {
   const {
     control,
     handleSubmit,
-    formState: {errors, isValid, isDirty},
+    formState: {errors, isValid, isDirty, touchedFields},
   } = useForm<IRegistration>({
     defaultValues: {
       email: '',
@@ -27,11 +27,11 @@ export default function Registration() {
       confirmPassword: '',
     },
     resolver: yupResolver(registerSchema),
-    mode: 'onChange',
+    mode: 'onTouched',
   });
   console.log(useForm());
 
-  const onSubmit = (data: {}) => console.log(data);
+  const onSubmit = (data: IRegistration) => console.log(data);
   return (
     <AuthLayout>
       <AuthHeader activeTab="registration" />
@@ -44,7 +44,7 @@ export default function Registration() {
               value={value}
               onChangeText={onChange}
               placeholder="Email"
-              error={errors.email?.message}
+              error={touchedFields.email ? errors.email?.message : null}
             />
           )}
           name="email"
@@ -58,7 +58,7 @@ export default function Registration() {
               onChangeText={onChange}
               placeholder="Password"
               secureTextEntry={true}
-              error={errors.password?.message}
+              error={touchedFields.password ? errors.password?.message : null}
             />
           )}
           name="password"
@@ -72,7 +72,11 @@ export default function Registration() {
               onChangeText={onChange}
               placeholder="Confirm Password"
               secureTextEntry={true}
-              error={errors.confirmPassword?.message}
+              error={
+                touchedFields.confirmPassword
+                  ? errors.confirmPassword?.message
+                  : null
+              }
             />
           )}
           name="confirmPassword"

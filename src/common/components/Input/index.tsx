@@ -29,10 +29,9 @@ export default function Input({
   onFocus,
 }: IInput) {
   const [isVisiblePassword, setIsVisiblePassword] = useState(secureTextEntry);
-  console.log(isVisiblePassword);
 
   return (
-    <>
+    <View>
       <View style={[styles.inputContainer, additionalContainerStyle]}>
         <TextInput
           placeholder={placeholder}
@@ -56,7 +55,11 @@ export default function Input({
           </TouchableOpacity>
         )}
       </View>
-      {!!error && <Text>{error}</Text>}
-    </>
+      {!!error && (
+        <View style={styles.errorTextContainer}>
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      )}
+    </View>
   );
 }

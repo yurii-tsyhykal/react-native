@@ -1,6 +1,5 @@
 import {Platform, StyleSheet} from 'react-native';
-import { fonts } from '../../constants/fonts';
-
+import {fonts} from '../../constants/fonts';
 
 export default StyleSheet.create({
   mainWrapper: {
@@ -53,7 +52,7 @@ export default StyleSheet.create({
   inputContainer: {
     borderWidth: 1,
     borderRadius: 25,
-    marginVertical: 4,
+    margin: 0,
     paddingVertical: Platform.select({
       android: 12,
       ios: 14,
@@ -67,9 +66,21 @@ export default StyleSheet.create({
   formContainer: {
     marginTop: 28,
     marginBottom: 68,
+    gap: 13,
   },
   input: {
     padding: 0,
+  },
+  errorTextContainer: {
+    height: 12,
+    position: 'relative',
+    padding: 0,
+  },
+  errorText: {
+    color: 'red',
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
   activeTabContainer: {
     backgroundColor: '#7A71BA',

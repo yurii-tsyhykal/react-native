@@ -22,7 +22,7 @@ export default function DefaultBtn({
         // eslint-disable-next-line react-native/no-inline-styles
         disabled && {opacity: 0.5},
       ]}>
-      <Text>{text}</Text>
+      <Text >{text}</Text>
     </TouchableOpacity>
   );
 }
