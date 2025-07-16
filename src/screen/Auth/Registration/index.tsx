@@ -67,6 +67,7 @@ export default function Registration() {
           control={control}
           render={({field: {onBlur, onChange, value}}) => (
             <Input
+              additionalContainerStyle={styles.loginPwdInput}
               onBlur={onBlur}
               value={value}
               onChangeText={onChange}

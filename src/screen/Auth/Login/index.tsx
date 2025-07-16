@@ -3,6 +3,8 @@ import {View} from 'react-native';
 import DefaultBtn from '../../../common/components/DefaultBtn';
 import Input from '../../../common/components/Input';
 import styles from '../styles';
+import AuthLayout from '../components/AuthLayout';
+import AuthHeader from '../components/AuthHeader';
 
 interface InputValue {
   email: string;
@@ -45,7 +47,7 @@ export default function LoginPage() {
     }
   };
 
-  const isDisabledactiveTab = Boolean(
+  const isDisabledActiveTab = Boolean(
     inputValues.errorEmail ||
       inputValues.errorPassword ||
       !inputValues.email ||
@@ -53,7 +55,8 @@ export default function LoginPage() {
   );
 
   return (
-    <>
+    <AuthLayout>
+      <AuthHeader activeTab="login" />
       <View style={styles.formContainer}>
         <Input
           placeholder="Email"
@@ -75,9 +78,9 @@ export default function LoginPage() {
       </View>
       <DefaultBtn
         onPress={() => {}}
-        disabled={isDisabledactiveTab}
+        disabled={isDisabledActiveTab}
         text="Увійти"
       />
-    </>
+    </AuthLayout>
   );
 }

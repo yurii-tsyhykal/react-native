@@ -71,6 +71,9 @@ export default StyleSheet.create({
   input: {
     padding: 0,
   },
+  loginPwdInput: {
+    marginBottom: 68,
+  },
   errorTextContainer: {
     height: 12,
     position: 'relative',
