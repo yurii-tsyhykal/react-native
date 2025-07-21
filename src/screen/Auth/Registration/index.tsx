@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import AuthLayout from '../components/AuthLayout';
 import AuthHeader from '../components/AuthHeader';
 import {View} from 'react-native';
@@ -8,6 +8,11 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {registerSchema} from '../utils/schemas';
 import DefaultBtn from '../../../common/components/DefaultBtn';
 import styles from '../styles';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+} from '@react-native-firebase/auth';
 
 export interface IRegistration {
   email: string;
@@ -19,7 +24,8 @@ export default function Registration() {
   const {
     control,
     handleSubmit,
-    formState: {errors, isValid, isDirty, touchedFields},
+    setError,
+    formState: {errors, isValid, isDirty},
   } = useForm<IRegistration>({
     defaultValues: {
       email: '',
@@ -29,9 +35,39 @@ export default function Registration() {
     resolver: yupResolver(registerSchema),
     mode: 'onTouched',
   });
-  console.log(useForm());
 
-  const onSubmit = (data: IRegistration) => console.log(data);
+  const registerNewUser = async (email: string, password: string) => {
+    try {
+      const result = await createUserWithEmailAndPassword(
+        getAuth(),
+        email,
+        password,
+      );
+      return result;
+    } catch (error) {
+      const firebaseError = error as {code: string};
+      if (firebaseError.code === 'auth/email-already-in-use') {
+        setError('email', {
+          message: 'This email is already in use',
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    const subscriber = onAuthStateChanged(getAuth(), user => {
+      if (user) {
+        console.log('user is signed in');
+      } else {
+        console.log('user is signed out');
+      }
+    });
+    return subscriber;
+  }, []);
+
+  const onSubmit = (data: IRegistration) => {
+    registerNewUser(data.email, data.password);
+  };
   return (
     <AuthLayout>
       <AuthHeader activeTab="registration" />
@@ -44,7 +80,7 @@ export default function Registration() {
               value={value}
               onChangeText={onChange}
               placeholder="Email"
-              error={touchedFields.email ? errors.email?.message : null}
+              error={errors.email?.message}
             />
           )}
           name="email"
@@ -58,7 +94,7 @@ export default function Registration() {
               onChangeText={onChange}
               placeholder="Password"
               secureTextEntry={true}
-              error={touchedFields.password ? errors.password?.message : null}
+              error={errors.password?.message}
             />
           )}
           name="password"
@@ -67,17 +103,13 @@ export default function Registration() {
           control={control}
           render={({field: {onBlur, onChange, value}}) => (
             <Input
-              additionalContainerStyle={styles.loginPwdInput}
+              confirmPwdStyle={styles.loginPwdInput}
               onBlur={onBlur}
               value={value}
               onChangeText={onChange}
               placeholder="Confirm Password"
               secureTextEntry={true}
-              error={
-                touchedFields.confirmPassword
-                  ? errors.confirmPassword?.message
-                  : null
-              }
+              error={errors.confirmPassword?.message}
             />
           )}
           name="confirmPassword"

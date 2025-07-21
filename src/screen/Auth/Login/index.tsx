@@ -5,6 +5,7 @@ import Input from '../../../common/components/Input';
 import styles from '../styles';
 import AuthLayout from '../components/AuthLayout';
 import AuthHeader from '../components/AuthHeader';
+import {getAuth, signInWithEmailAndPassword} from '@react-native-firebase/auth';
 
 interface InputValue {
   email: string;
@@ -54,6 +55,10 @@ export default function LoginPage() {
       !inputValues.password,
   );
 
+  const onLogin = async (email: string, password: string) => {
+    const result = await signInWithEmailAndPassword(getAuth(), email, password);
+    console.log(result);
+  };
   return (
     <AuthLayout>
       <AuthHeader activeTab="login" />
@@ -77,7 +82,9 @@ export default function LoginPage() {
         />
       </View>
       <DefaultBtn
-        onPress={() => {}}
+        onPress={() => {
+          onLogin(inputValues.email, inputValues.password);
+        }}
         disabled={isDisabledActiveTab}
         text="Увійти"
       />

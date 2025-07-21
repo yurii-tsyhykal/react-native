@@ -13,6 +13,7 @@ export interface IInput {
   secureTextEntry?: boolean;
   additionalContainerStyle?: ViewStyle;
   additionalInputStyle?: ViewStyle;
+  confirmPwdStyle?: ViewStyle;
   onFocus?: () => void;
 }
 
@@ -26,12 +27,13 @@ export default function Input({
   secureTextEntry = false,
   additionalContainerStyle,
   additionalInputStyle,
+  confirmPwdStyle,
   onFocus,
 }: IInput) {
   const [isVisiblePassword, setIsVisiblePassword] = useState(secureTextEntry);
 
   return (
-    <View>
+    <View style={confirmPwdStyle}>
       <View style={[styles.inputContainer, additionalContainerStyle]}>
         <TextInput
           placeholder={placeholder}
