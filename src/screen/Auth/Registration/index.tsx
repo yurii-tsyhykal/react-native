@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import AuthLayout from '../components/AuthLayout';
 import AuthHeader from '../components/AuthHeader';
 import {View} from 'react-native';
@@ -11,8 +11,11 @@ import styles from '../styles';
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  onAuthStateChanged,
 } from '@react-native-firebase/auth';
+import {CommonActions, useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackNavigation} from '../../../navigation/types';
+import {ScreenNames} from '../../../constants/screenNames';
 
 export interface IRegistration {
   email: string;
@@ -36,14 +39,24 @@ export default function Registration() {
     mode: 'onTouched',
   });
 
+  const navigation = useNavigation<StackNavigationProp<RootStackNavigation>>();
+
   const registerNewUser = async (email: string, password: string) => {
     try {
-      const result = await createUserWithEmailAndPassword(
+      const {user} = await createUserWithEmailAndPassword(
         getAuth(),
         email,
         password,
       );
-      return result;
+      if (user) {
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 1,
+            routes: [{name: ScreenNames.LOGGED_IN_STACK}],
+          }),
+        );
+      }
+      return user;
     } catch (error) {
       const firebaseError = error as {code: string};
       if (firebaseError.code === 'auth/email-already-in-use') {
@@ -54,23 +67,12 @@ export default function Registration() {
     }
   };
 
-  useEffect(() => {
-    const subscriber = onAuthStateChanged(getAuth(), user => {
-      if (user) {
-        console.log('user is signed in');
-      } else {
-        console.log('user is signed out');
-      }
-    });
-    return subscriber;
-  }, []);
-
   const onSubmit = (data: IRegistration) => {
     registerNewUser(data.email, data.password);
   };
   return (
     <AuthLayout>
-      <AuthHeader activeTab="registration" />
+      <AuthHeader activeTab="Registration" />
       <View style={styles.formContainer}>
         <Controller
           control={control}

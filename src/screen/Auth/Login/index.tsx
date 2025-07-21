@@ -1,11 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import DefaultBtn from '../../../common/components/DefaultBtn';
 import Input from '../../../common/components/Input';
 import styles from '../styles';
 import AuthLayout from '../components/AuthLayout';
 import AuthHeader from '../components/AuthHeader';
-import {getAuth, signInWithEmailAndPassword} from '@react-native-firebase/auth';
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from '@react-native-firebase/auth';
+import {ScreenNames} from '../../../constants/screenNames';
+import {CommonActions, useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackNavigation} from '../../../navigation/types';
 
 interface InputValue {
   email: string;
@@ -55,10 +63,29 @@ export default function LoginPage() {
       !inputValues.password,
   );
 
+  const navigation = useNavigation<StackNavigationProp<RootStackNavigation>>();
+
   const onLogin = async (email: string, password: string) => {
-    const result = await signInWithEmailAndPassword(getAuth(), email, password);
-    console.log(result);
+    const {user} = await signInWithEmailAndPassword(getAuth(), email, password);
+    console.log(user);
   };
+
+  useEffect(() => {
+    const subscriber = onAuthStateChanged(getAuth(), user => {
+      if (user) {
+        console.log('user is signed in');
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 1,
+            routes: [{name: ScreenNames.LOGGED_IN_STACK}],
+          }),
+        );
+      } else {
+        console.log('user is signed out');
+      }
+    });
+    return subscriber;
+  }, [navigation]);
   return (
     <AuthLayout>
       <AuthHeader activeTab="login" />

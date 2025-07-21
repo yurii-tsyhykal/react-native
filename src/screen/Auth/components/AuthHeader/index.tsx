@@ -7,7 +7,7 @@ import {RootStackNavigation} from '../../../../navigation/types';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 export interface IAuthHeader {
-  activeTab: 'login' | 'registration';
+  activeTab: 'login' | 'Registration';
 }
 
 export default function AuthHeader({activeTab}: IAuthHeader) {
@@ -15,7 +15,7 @@ export default function AuthHeader({activeTab}: IAuthHeader) {
 
   const navigateToLogin = () => navigate.navigate(ScreenNames.LOGIN_PAGE);
   const navigateToRegistration = () =>
-    navigate.navigate(ScreenNames.REGISTRATION_PAGE);
+    navigate.navigate(ScreenNames.Registration_PAGE);
 
   return (
     <>
@@ -35,7 +35,7 @@ export default function AuthHeader({activeTab}: IAuthHeader) {
         <TouchableOpacity
           onPress={navigateToRegistration}
           style={
-            activeTab === 'registration' ? styles.activeTab : styles.disabledTab
+            activeTab === 'Registration' ? styles.activeTab : styles.disabledTab
           }>
           <Text style={styles.authText}>Реєстрація</Text>
         </TouchableOpacity>
