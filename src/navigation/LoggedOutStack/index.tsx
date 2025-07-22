@@ -9,7 +9,9 @@ const Stack = createNativeStackNavigator<LoggedOutStackType>();
 
 export default function LoggedOutStack() {
   return (
-    <Stack.Navigator initialRouteName={ScreenNames.LOGIN_PAGE}>
+    <Stack.Navigator
+      initialRouteName={ScreenNames.LOGIN_PAGE}
+      screenOptions={{headerShown: false}}>
       <Stack.Screen name={ScreenNames.LOGIN_PAGE} component={LoginPage} />
       <Stack.Screen
         name={ScreenNames.REGISTRATION_PAGE}
