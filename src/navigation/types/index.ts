@@ -4,7 +4,7 @@ export type RootStackNavigation = {
 };
 
 export type LoggedInStackType = {
-  TAB_BAR_STACK: undefined;
+  DRAWER_STACK: undefined;
 };
 
 export type LoggedOutStackType = {
@@ -17,7 +17,11 @@ export type TabBarStackType = {
   FAVORITE_PAGE: undefined;
 };
 
-const LoggedInStack: LoggedInStackType = {
+export type DrawerStackType = {
+  TAB_BAR_STACK: undefined;
+};
+
+const LoggedInStack: DrawerStackType = {
   TAB_BAR_STACK: undefined,
 };
 

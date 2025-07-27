@@ -1,4 +1,4 @@
-import React from 'react';
+import 'react-native-gesture-handler';
 import {View} from 'react-native';
 import RootNavigation from './src/navigation';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
