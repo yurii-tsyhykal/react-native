@@ -1,6 +1,6 @@
 import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
 import {View} from 'react-native';
-import {HeartIcon, LabelIcon, PawIcon} from '../../assets/icons';
+import {HeartIcon, PawIcon} from '../../assets/icons';
 import {ScreenNames} from '../../constants/screenNames';
 import {Text} from 'react-native-gesture-handler';
 
@@ -26,21 +26,7 @@ export default function TabBarOptions(route: {
   name: string;
 }): BottomTabNavigationOptions {
   return {
-    header: () => {
-      return (
-        <View
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            width: '100%',
-            height: 60,
-            alignItems: 'center',
-            padding: 10,
-          }}
-        >
-          <LabelIcon />
-        </View>
-      );
-    },
+    headerShown: false,
     tabBarShowLabel: true,
     tabBarLabelStyle: {
       fontSize: 12,
