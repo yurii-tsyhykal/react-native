@@ -5,6 +5,7 @@ import {RootStackNavigation} from '../../navigation/types';
 
 export default function HomePage() {
   const navigation = useNavigation<StackNavigationProp<RootStackNavigation>>();
+  const getData = () => {};
   return (
     <TouchableOpacity onPress={() => navigation.goBack}>
       <Text>Hello</Text>
