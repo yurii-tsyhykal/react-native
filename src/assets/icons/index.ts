@@ -5,5 +5,15 @@ import HeartIcon from './HeartIcon';
 import LabelIcon from './LabelIcon';
 import CloseIcon from './CloseIcon';
 import ArrowRightIcon from './ArrowRightIcon';
+import FavoriteIcon from './FavoriteIcon';
 
-export {VisibleIcon, NotVisibleIcon, PawIcon, HeartIcon, LabelIcon, CloseIcon, ArrowRightIcon};
+export {
+  VisibleIcon,
+  NotVisibleIcon,
+  PawIcon,
+  HeartIcon,
+  LabelIcon,
+  CloseIcon,
+  ArrowRightIcon,
+  FavoriteIcon,
+};
