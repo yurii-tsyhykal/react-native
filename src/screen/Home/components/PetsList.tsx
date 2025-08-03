@@ -22,18 +22,21 @@ export default function PetsList({pets}: {pets: IPets[]}) {
           return (
             <TouchableOpacity style={styles.item}>
               <ImageBackground
-                source={{uri: item.images[0]}}
+                source={{
+                  uri: item.images[0],
+                }}
                 imageStyle={styles.bgImage}
                 style={styles.image}
                 resizeMode="cover"
-              />
-              <TouchableOpacity style={styles.favIconBtn}>
-                <FavoriteIcon />
-              </TouchableOpacity>
-              <View style={styles.textContainer}>
-                <Text>{item.type}</Text>
-                <Text>{item.age}</Text>
-              </View>
+              >
+                <TouchableOpacity style={styles.favIconBtn}>
+                  <FavoriteIcon />
+                </TouchableOpacity>
+                <View style={styles.textContainer}>
+                  <Text style={styles.text}>{item.type}</Text>
+                  <Text style={styles.text}>{`${item.age} years`}</Text>
+                </View>
+              </ImageBackground>
             </TouchableOpacity>
           );
         }}

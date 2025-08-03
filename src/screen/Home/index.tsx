@@ -1,7 +1,8 @@
-import {View} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {useEffect, useState} from 'react';
 import PetsList from './components/PetsList';
+import {StyleSheet, View} from 'react-native';
+import SearchBar from './components/SearchBar';
 
 export interface IPets {
   age: number;
@@ -11,7 +12,7 @@ export interface IPets {
   description: string;
   size: string;
   isVaccinated: boolean;
-  images: [string];
+  images: string[];
   sex: string;
   isDog: boolean;
   color: string;
@@ -34,8 +35,15 @@ export default function HomePage() {
     getData();
   }, []);
   return (
-    <>
+    <View style={styles.wrapper}>
+      <SearchBar />
       <PetsList pets={pets} />
-    </>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
+});

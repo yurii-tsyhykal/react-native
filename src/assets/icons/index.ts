@@ -6,6 +6,8 @@ import LabelIcon from './LabelIcon';
 import CloseIcon from './CloseIcon';
 import ArrowRightIcon from './ArrowRightIcon';
 import FavoriteIcon from './FavoriteIcon';
+import SearchIcon from './SearchIcon';
+import SettingsIcon from './SettingsIcon';
 
 export {
   VisibleIcon,
@@ -16,4 +18,6 @@ export {
   CloseIcon,
   ArrowRightIcon,
   FavoriteIcon,
+  SearchIcon,
+  SettingsIcon,
 };
