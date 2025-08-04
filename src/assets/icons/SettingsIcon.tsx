@@ -1,10 +1,10 @@
 import Svg, {Path} from 'react-native-svg';
 
-export default () => {
+export default ({width = 40, height = 42}) => {
   return (
-    <Svg width={40} height={42} fill="none" viewBox="0 0 40 42">
+    <Svg width={width} height={height} fill="none" viewBox="0 0 40 42">
       <Path
-        stroke="#141B34"
+        stroke="#838383"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="3"

@@ -31,12 +31,29 @@ export default function HomePage() {
       console.log(`ERROR: ${error}`);
     }
   };
+  const handleSearch = async (text: string) => {
+    const toUpper = text.charAt(0).toUpperCase() + text.slice(1);
+    try {
+      const data = await firestore()
+        .collection('animals')
+        .orderBy('type')
+        .startAt(toUpper)
+        .endAt(toUpper + '\uf8ff')
+        .get();
+
+      const result: IPets[] = data.docs.map(i => i.data()) as IPets[];
+      setPets(result);
+    } catch (error) {
+      console.log(`ERROR: ${error}`);
+    }
+  };
+
   useEffect(() => {
     getData();
   }, []);
   return (
     <View style={styles.wrapper}>
-      <SearchBar />
+      <SearchBar handleSearch={handleSearch} />
       <PetsList pets={pets} />
     </View>
   );

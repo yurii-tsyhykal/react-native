@@ -7,18 +7,37 @@ import {
 } from 'react-native';
 import SearchIcon from '../../../assets/icons/SearchIcon';
 import {SettingsIcon} from '../../../assets/icons';
+import {useEffect, useState} from 'react';
 
-export default function SearchBar() {
+interface ISearchBar {
+  handleSearch: (text: string) => void;
+}
+
+export default function SearchBar({handleSearch}: ISearchBar) {
+  const [name, setName] = useState('');
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      handleSearch(name);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [handleSearch, name]);
   return (
     <View style={styles.mainWrapper}>
       <View style={styles.searchWrapper}>
         <View style={styles.searchIconWrapper}>
-          <SearchIcon />
+          <SearchIcon width={16} height={16} />
         </View>
-        <TextInput placeholder="Пошук" />
+        <TextInput
+          placeholder="Пошук"
+          style={styles.input}
+          value={name}
+          onChangeText={(text: string) =>
+            setName(text.trim())
+          }
+        />
       </View>
       <TouchableOpacity style={styles.settingsIcon}>
-        <SettingsIcon />
+        <SettingsIcon width={19} height={19} />
       </TouchableOpacity>
     </View>
   );
@@ -42,5 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#EFF1F4',
   },
+  input: {flex: 1},
 });
