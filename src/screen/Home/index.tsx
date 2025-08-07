@@ -1,8 +1,17 @@
-import firestore from '@react-native-firebase/firestore';
+import {
+  collection,
+  endAt,
+  getDocs,
+  orderBy,
+  query,
+  QuerySnapshot,
+  startAt,
+} from 'firebase/firestore';
 import {useEffect, useState} from 'react';
 import PetsList from './components/PetsList';
 import {StyleSheet, View} from 'react-native';
 import SearchBar from './components/SearchBar';
+import {db} from '../../config/firebaseConfig';
 
 export interface IPets {
   age: number;
@@ -19,29 +28,39 @@ export interface IPets {
   timeStamp: number;
 }
 
+function extractData(snapshot: QuerySnapshot): IPets[] {
+  const result = snapshot.docs.map(doc => doc.data() as IPets);
+  return result;
+}
+
 export default function HomePage() {
   const [pets, setPets] = useState<IPets[]>([]);
 
   const getData = async () => {
     try {
-      const data = await firestore().collection('animals').get();
-      const result: IPets[] = data.docs.map(i => i.data()) as IPets[];
+      const q = query(collection(db, 'animals'));
+      const querySnapshot = await getDocs(q);
+
+      const result = extractData(querySnapshot);
       setPets(result);
     } catch (error) {
       console.log(`ERROR: ${error}`);
     }
   };
   const handleSearch = async (text: string) => {
+    if (text.trim().length === 0) {
+      return;
+    }
     const toUpper = text.charAt(0).toUpperCase() + text.slice(1);
     try {
-      const data = await firestore()
-        .collection('animals')
-        .orderBy('type')
-        .startAt(toUpper)
-        .endAt(toUpper + '\uf8ff')
-        .get();
-
-      const result: IPets[] = data.docs.map(i => i.data()) as IPets[];
+      const q = query(
+        collection(db, 'animals'),
+        orderBy('type'),
+        startAt(toUpper),
+        endAt(toUpper + '\uf8ff'),
+      );
+      const querySnapshot = await getDocs(q);
+      const result = extractData(querySnapshot);
       setPets(result);
     } catch (error) {
       console.log(`ERROR: ${error}`);

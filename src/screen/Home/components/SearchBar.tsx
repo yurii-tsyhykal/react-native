@@ -31,9 +31,7 @@ export default function SearchBar({handleSearch}: ISearchBar) {
           placeholder="Пошук"
           style={styles.input}
           value={name}
-          onChangeText={(text: string) =>
-            setName(text.trim())
-          }
+          onChangeText={(text: string) => setName(text.trim())}
         />
       </View>
       <TouchableOpacity style={styles.settingsIcon}>
@@ -44,7 +42,7 @@ export default function SearchBar({handleSearch}: ISearchBar) {
 }
 
 const styles = StyleSheet.create({
-  mainWrapper: {flexDirection: 'row', alignItems: 'center'},
+  mainWrapper: {flexDirection: 'row', alignItems: 'center', marginBottom: 5},
   searchWrapper: {
     borderRadius: 20,
     backgroundColor: '#EFF1F4',
