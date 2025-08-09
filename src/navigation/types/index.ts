@@ -5,6 +5,7 @@ export type RootStackNavigation = {
 
 export type LoggedInStackType = {
   DRAWER_STACK: undefined;
+  FILTER_PAGE: undefined;
 };
 
 export type LoggedOutStackType = {

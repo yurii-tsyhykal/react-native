@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {IPets} from '../index';
+import {IPets} from '../../../screen/Home/index';
 import {FavoriteIcon} from '../../../assets/icons';
 import {fonts} from '../../../constants/fonts';
 

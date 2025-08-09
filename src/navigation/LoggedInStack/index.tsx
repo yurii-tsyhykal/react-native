@@ -4,6 +4,8 @@ import {ScreenNames} from '../../constants/screenNames';
 import {LoggedInStackType} from '../types';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import DrawerStack from '../DrawerStack';
+import Filter from '../../screen/Filter';
+import FilterHeader from '../../common/components/FilterHeader';
 
 const Stack = createNativeStackNavigator<LoggedInStackType>();
 
@@ -13,10 +15,16 @@ export default function LoggedInStack() {
     <SafeAreaView style={{flex: 1}}>
       <Stack.Navigator
         initialRouteName={ScreenNames.DRAWER_STACK}
-        screenOptions={{headerShown: false}}>
+        screenOptions={{headerShown: false}}
+      >
+        <Stack.Screen name={ScreenNames.DRAWER_STACK} component={DrawerStack} />
         <Stack.Screen
-          name={ScreenNames.DRAWER_STACK}
-          component={DrawerStack}
+          options={{
+            headerShown: true,
+            header: () => <FilterHeader />,
+          }}
+          name={ScreenNames.FILTER_PAGE}
+          component={Filter}
         />
       </Stack.Navigator>
     </SafeAreaView>

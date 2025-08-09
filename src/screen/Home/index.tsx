@@ -8,10 +8,10 @@ import {
   startAt,
 } from 'firebase/firestore';
 import {useEffect, useState} from 'react';
-import PetsList from './components/PetsList';
+import PetsList from '../../common/components/PetList/PetsList';
 import {StyleSheet, View} from 'react-native';
-import SearchBar from './components/SearchBar';
 import {db} from '../../config/firebaseConfig';
+import SearchBar from '../../common/components/SearchBar/SearchBar';
 
 export interface IPets {
   age: number;

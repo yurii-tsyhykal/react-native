@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Header from '../Header';
 import {fonts} from '../../../constants/fonts';
-import {ArrowRightIcon} from '../../../assets/icons';
+import {ArrowIcon} from '../../../assets/icons';
 
 export default function DrawerContent({props}: any) {
   return (
@@ -10,11 +10,11 @@ export default function DrawerContent({props}: any) {
       <View style={styles.wrapper}>
         <TouchableOpacity style={styles.btn}>
           <Text style={styles.btnText}>Наш сайт</Text>
-          <ArrowRightIcon />
+          <ArrowIcon />
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn}>
           <Text style={styles.btnText}>Налаштування мови</Text>
-          <ArrowRightIcon />
+          <ArrowIcon />
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn}>
           <Text style={styles.btnText}>Вихід</Text>

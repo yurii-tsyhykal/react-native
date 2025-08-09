@@ -4,7 +4,7 @@ import PawIcon from './PawIcon';
 import HeartIcon from './HeartIcon';
 import LabelIcon from './LabelIcon';
 import CloseIcon from './CloseIcon';
-import ArrowRightIcon from './ArrowRightIcon';
+import ArrowIcon from './ArrowIcon';
 import FavoriteIcon from './FavoriteIcon';
 import SearchIcon from './SearchIcon';
 import SettingsIcon from './SettingsIcon';
@@ -16,7 +16,7 @@ export {
   HeartIcon,
   LabelIcon,
   CloseIcon,
-  ArrowRightIcon,
+  ArrowIcon,
   FavoriteIcon,
   SearchIcon,
   SettingsIcon,
