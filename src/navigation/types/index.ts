@@ -1,3 +1,6 @@
+import {ISettings} from '../../screen/Filter';
+import {IPets} from '../../screen/Home';
+
 export type RootStackNavigation = {
   LOGGED_IN_STACK: {screens: keyof typeof LoggedInStack};
   LOGGED_OUT_STACK: {screens: keyof typeof LoggedOutStack};
@@ -5,7 +8,9 @@ export type RootStackNavigation = {
 
 export type LoggedInStackType = {
   DRAWER_STACK: undefined;
-  FILTER_PAGE: undefined;
+  FILTER_PAGE: {
+    petList: IPets[];
+  };
 };
 
 export type LoggedOutStackType = {
@@ -14,7 +19,7 @@ export type LoggedOutStackType = {
 };
 
 export type TabBarStackType = {
-  HOME_PAGE: undefined;
+  HOME_PAGE: {settings: ISettings};
   FAVORITE_PAGE: undefined;
 };
 

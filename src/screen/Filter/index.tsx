@@ -1,7 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {
+  Dimensions,
   ScrollView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -10,55 +12,68 @@ import {
 import {TabBarStackType} from '../../navigation/types';
 import {useState} from 'react';
 import SwitchBtn from '../../common/components/SwitchBtn';
-import {PawIcon, SearchIcon} from '../../assets/icons';
+import {
+  FemaleIcon,
+  Male,
+  MaleAndFemaleIcon,
+  SearchIcon,
+} from '../../assets/icons';
 import DefaultBtn from '../../common/components/DefaultBtn';
 import {ScreenNames} from '../../constants/screenNames';
+import {fonts} from '../../constants/fonts';
 
 export interface ISettings {
-  sortByTime: boolean;
-  selectedAnimal: boolean;
-  selectedSex: 'male' | 'female';
+  TimeStamp: boolean;
+  isDog: boolean;
+  sex: 'male' | 'female';
   size: 'big' | 'medium' | 'small';
   age: string;
-  isVaccinate: boolean;
+  isVaccinated: boolean;
 }
 
 export default function Filter() {
   const navigation = useNavigation<StackNavigationProp<TabBarStackType>>();
   const [settings, setSettings] = useState<ISettings>({
-    sortByTime: false,
-    selectedAnimal: true,
-    selectedSex: 'male',
+    TimeStamp: false,
+    isDog: true,
+    sex: 'male',
     size: 'small',
     age: '1',
-    isVaccinate: false,
+    isVaccinated: false,
   });
 
   const handleSwitchAnimal = (animal: {id: boolean}) => {
-    setSettings(prevState => ({...prevState, selectedAnimal: animal.id}));
+    setSettings(prev => ({...prev, isDog: animal.id}));
   };
   const handleSwitchSex = (animal: {id: 'male' | 'female'}) => {
-    setSettings(prevState => ({...prevState, selectedSex: animal.id}));
+    setSettings(prev => ({...prev, sex: animal.id}));
   };
   const handleSwitchSize = (animal: {id: 'big' | 'medium' | 'small'}) => {
-    setSettings(prevState => ({...prevState, size: animal.id}));
+    setSettings(prev => ({...prev, size: animal.id}));
   };
-  const onSortByTime = () => {
-    setSettings(prevState => ({
-      ...prevState,
-      sortByTime: !prevState.sortByTime,
+  const onTimeStamp = () => {
+    setSettings(prev => ({
+      ...prev,
+      TimeStamp: !prev.TimeStamp,
     }));
   };
 
   return (
-    <ScrollView>
-      <View>
-        <TouchableOpacity>
-          <View></View>
+    <ScrollView style={styles.scrollView}>
+      <View style={styles.mainWrapper}>
+        <TouchableOpacity
+          style={styles.TimeStampBtn}
+          onPress={() => {
+            onTimeStamp();
+          }}
+        >
+          <View style={styles.activeTimeStamp}>
+            {settings.TimeStamp && <View style={styles.checkedTimeStampBtn} />}
+          </View>
           <Text>Сортувати за датою додавання</Text>
         </TouchableOpacity>
         <SwitchBtn
-          active={settings.selectedAnimal}
+          active={settings.isDog}
           handleSwitch={handleSwitchAnimal}
           items={[
             {text: 'Собаки', id: true},
@@ -66,12 +81,12 @@ export default function Filter() {
           ]}
         />
         <SwitchBtn
-          active={settings.selectedSex}
+          active={settings.sex}
           handleSwitch={handleSwitchSex}
           items={[
-            {text: 'Хлопець', icon: <PawIcon />, id: 'male'},
-            {text: 'Дівчина', icon: <PawIcon />, id: 'female'},
-            {text: 'Будь-хто', icon: <PawIcon />, id: 'any'},
+            {text: 'Хлопець', icon: <Male />, id: 'male'},
+            {text: 'Дівчина', icon: <FemaleIcon />, id: 'female'},
+            {text: 'Будь-хто', icon: <MaleAndFemaleIcon />, id: 'any'},
           ]}
         />
         <SwitchBtn
@@ -83,28 +98,104 @@ export default function Filter() {
             {text: 'Великі', id: 'big'},
           ]}
         />
-        <View>
-          <Text></Text>
-          <View>
-            <View>
+        <View style={styles.ageWrapper}>
+          <Text style={styles.labelText}>Вік, роки</Text>
+          <View style={styles.ageInputWrapper}>
+            <View style={styles.ageIconWrapper}>
               <SearchIcon />
             </View>
-            <TextInput />
+            <TextInput
+              style={styles.ageInput}
+              placeholder={'1'}
+              keyboardType={'numeric'}
+              value={settings.age.toString()}
+              onChangeText={text => setSettings(prev => ({...prev, age: text}))}
+            />
           </View>
         </View>
-        <View>
-          <Text></Text>
-          <TouchableOpacity>
-            <View />
+        <View style={styles.isVaccinatedWrapper}>
+          <Text style={styles.labelText}>Вакцинація</Text>
+          <TouchableOpacity
+            style={[
+              styles.isVaccinatedSwitcher,
+              settings.isVaccinated && styles.isVaccinatedTrue,
+            ]}
+            onPress={() =>
+              setSettings(prev => ({...prev, isVaccinated: !prev.isVaccinated}))
+            }
+          >
+            <View style={styles.isVaccinatedCircle} />
           </TouchableOpacity>
         </View>
         <DefaultBtn
           text={'Показати варіанти'}
           onPress={() => {
-            navigation.navigate(ScreenNames.HOME_PAGE);
+            navigation.navigate(ScreenNames.HOME_PAGE, {settings: settings});
           }}
         />
       </View>
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  scrollView: {margin: 10, gap: 20},
+  mainWrapper: {gap: 20},
+  TimeStampBtn: {flexDirection: 'row', gap: 10, alignItems: 'center'},
+  activeTimeStamp: {
+    borderWidth: 1,
+    borderColor: '#7A71BA',
+    width: 15,
+    height: 15,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checkedTimeStampBtn: {
+    width: 10,
+    height: 10,
+    borderRadius: 50,
+    backgroundColor: '#7A71BA',
+  },
+
+  ageWrapper: {gap: 5},
+  labelText: {fontFamily: fonts.MontserratRegular, color: '#0B0B0B'},
+  ageInputWrapper: {
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#A0A0A0',
+    height: 50,
+    width: Dimensions.get('window').width - 20,
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  ageIconWrapper: {marginHorizontal: 20},
+  ageInput: {
+    flex: 1,
+  },
+  isVaccinatedWrapper: {
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  isVaccinatedSwitcher: {
+    width: 50,
+    borderRadius: 50,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#D0CBF1',
+    padding: 3,
+  },
+  isVaccinatedCircle: {
+    width: 20,
+    height: 20,
+    borderRadius: 50,
+    backgroundColor: '#7A71BA',
+  },
+  isVaccinatedTrue: {
+    alignItems: 'flex-end',
+    backgroundColor: '#D0CBF1',
+  },
+});

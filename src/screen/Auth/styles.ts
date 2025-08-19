@@ -85,11 +85,5 @@ export default StyleSheet.create({
     top: 0,
     left: 0,
   },
-  activeTabContainer: {
-    backgroundColor: '#7A71BA',
-    borderRadius: 25,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
   loginText: {color: 'white'},
 });

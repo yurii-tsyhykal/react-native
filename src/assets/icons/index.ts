@@ -8,6 +8,9 @@ import ArrowIcon from './ArrowIcon';
 import FavoriteIcon from './FavoriteIcon';
 import SearchIcon from './SearchIcon';
 import SettingsIcon from './SettingsIcon';
+import MaleAndFemaleIcon from './MaleAndFemaleIcon';
+import FemaleIcon from './FemaleIcon';
+import Male from './Male';
 
 export {
   VisibleIcon,
@@ -20,4 +23,7 @@ export {
   FavoriteIcon,
   SearchIcon,
   SettingsIcon,
+  MaleAndFemaleIcon,
+  FemaleIcon,
+  Male,
 };

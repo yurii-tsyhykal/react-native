@@ -14,3 +14,4 @@ export default ({color = '#838383', isFocused = false}) => {
     </Svg>
   );
 };
+

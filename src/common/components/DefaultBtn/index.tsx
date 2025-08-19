@@ -1,6 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Text} from 'react-native';
-import styles from '../../../screen/Auth/styles';
+import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 interface IDefaultBtn {
   disabled?: boolean;
@@ -19,10 +18,21 @@ export default function DefaultBtn({
       disabled={disabled}
       style={[
         styles.activeTabContainer,
-        // eslint-disable-next-line react-native/no-inline-styles
-        disabled && {opacity: 0.5},
-      ]}>
-      <Text >{text}</Text>
+        disabled && styles.disabledTabContainer,
+      ]}
+    >
+      <Text style={styles.btnText}>{text}</Text>
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  activeTabContainer: {
+    backgroundColor: '#7A71BA',
+    borderRadius: 25,
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  disabledTabContainer: {opacity: 0.5},
+  btnText: {color: 'white'},
+});
