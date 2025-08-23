@@ -12,6 +12,8 @@ import PetsList from '../../common/components/PetList/PetsList';
 import {StyleSheet, View} from 'react-native';
 import {db} from '../../config/firebaseConfig';
 import SearchBar from '../../common/components/SearchBar/SearchBar';
+import {RouteProp, useRoute} from '@react-navigation/native';
+import {ISettings} from '../Filter';
 
 export interface IPets {
   age: number;
@@ -19,7 +21,7 @@ export interface IPets {
   location: string;
   name: string;
   description: string;
-  size: string;
+  size: 'big' | 'medium' | 'small';
   isVaccinated: boolean;
   images: string[];
   sex: string;
@@ -35,6 +37,8 @@ function extractData(snapshot: QuerySnapshot): IPets[] {
 
 export default function HomePage() {
   const [pets, setPets] = useState<IPets[]>([]);
+  const route = useRoute<RouteProp<{params: {settings: ISettings}}>>();
+  console.log(route);
 
   const getData = async () => {
     try {
@@ -64,6 +68,13 @@ export default function HomePage() {
       setPets(result);
     } catch (error) {
       console.log(`ERROR: ${error}`);
+    }
+  };
+
+  const handleSearchWithFilter = async (settings: ISettings) => {
+    try {
+    } catch (error) {
+      console.log(`ERROR FILTER: ${error}`);
     }
   };
 

@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {TabBarStackType} from '../../navigation/types';
+import {LoggedInStackType} from '../../navigation/types';
 import {useState} from 'react';
 import SwitchBtn from '../../common/components/SwitchBtn';
 import {
@@ -23,7 +23,7 @@ import {ScreenNames} from '../../constants/screenNames';
 import {fonts} from '../../constants/fonts';
 
 export interface ISettings {
-  TimeStamp: boolean;
+  timeStamp: boolean;
   isDog: boolean;
   sex: 'male' | 'female';
   size: 'big' | 'medium' | 'small';
@@ -32,9 +32,9 @@ export interface ISettings {
 }
 
 export default function Filter() {
-  const navigation = useNavigation<StackNavigationProp<TabBarStackType>>();
+  const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
   const [settings, setSettings] = useState<ISettings>({
-    TimeStamp: false,
+    timeStamp: false,
     isDog: true,
     sex: 'male',
     size: 'small',
@@ -54,7 +54,7 @@ export default function Filter() {
   const onTimeStamp = () => {
     setSettings(prev => ({
       ...prev,
-      TimeStamp: !prev.TimeStamp,
+      timeStamp: !prev.timeStamp,
     }));
   };
 
@@ -68,7 +68,7 @@ export default function Filter() {
           }}
         >
           <View style={styles.activeTimeStamp}>
-            {settings.TimeStamp && <View style={styles.checkedTimeStampBtn} />}
+            {settings.timeStamp && <View style={styles.checkedTimeStampBtn} />}
           </View>
           <Text>Сортувати за датою додавання</Text>
         </TouchableOpacity>
@@ -130,7 +130,18 @@ export default function Filter() {
         <DefaultBtn
           text={'Показати варіанти'}
           onPress={() => {
-            navigation.navigate(ScreenNames.HOME_PAGE, {settings: settings});
+            navigation.navigate(
+              ScreenNames.DRAWER_STACK,
+              {
+                screen: ScreenNames.TAB_BAR_STACK,
+                params: {
+                  screen: ScreenNames.HOME_PAGE,
+                  params: {
+                    settings: settings,
+                  },
+                },
+              },
+            );
           }}
         />
       </View>

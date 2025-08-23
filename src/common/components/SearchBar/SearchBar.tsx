@@ -9,7 +9,7 @@ import {useEffect, useState} from 'react';
 import {SearchIcon, SettingsIcon} from '../../../assets/icons';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {LoggedInStackType, TabBarStackType} from '../../../navigation/types';
+import {LoggedInStackType} from '../../../navigation/types';
 import {ScreenNames} from '../../../constants/screenNames';
 import {IPets} from '../../../screen/Home';
 
@@ -29,7 +29,7 @@ export default function SearchBar({handleSearch, pets}: ISearchBar) {
   }, [handleSearch, name]);
 
   const handleGoToFilter = () => {
-    navigation.navigate(ScreenNames.FILTER_PAGE);
+    navigation.navigate(ScreenNames.FILTER_PAGE, {petList: pets});
   };
   return (
     <View style={styles.mainWrapper}>
