@@ -1,24 +1,43 @@
 import {algoliaClient} from '../config/algoliaConfig';
 import {IPets} from '../screen/Home';
 import {Hit} from 'algoliasearch';
+import {filterToString} from './filterToString';
+import {ISettings} from '../screen/Filter';
+import {getIndex} from './getIndex';
 
 export type AlgoliaHit = IPets & Hit;
 
-export default async function algoliaFetch(
-  query: string,
-  filter: string = '',
-): Promise<AlgoliaHit[]> {
+interface IAlgoliaFetch {
+  text: string;
+  attributes?: string[];
+  filter?: ISettings;
+}
+
+export default async function algoliaFetch({
+  text,
+  attributes = [],
+  filter,
+}: IAlgoliaFetch): Promise<AlgoliaHit[]> {
+  const timeStamp = filter?.timeStamp ?? null;
+  const filtersToString = filter ? filterToString(filter) : '';
+  const index = getIndex(timeStamp);
+
   try {
+
     const result = await algoliaClient.searchSingleIndex({
-      indexName: 'animals',
+      indexName: index,
       searchParams: {
-        query: query,
-        filters: filter,
+        query: text,
+        ...(attributes.length > 0 && {
+          restrictSearchableAttributes: attributes,
+        }),
+        ...(filter && {filters: filtersToString}),
+        typoTolerance: false,
       },
     });
-    console.log('algolia utils', result);
     return result.hits as AlgoliaHit[];
   } catch (error) {
+    console.log('error algolia', error);
     return [];
   }
 }

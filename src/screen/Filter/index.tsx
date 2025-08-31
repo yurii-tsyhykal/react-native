@@ -22,82 +22,72 @@ import DefaultBtn from '../../common/components/DefaultBtn';
 import {ScreenNames} from '../../constants/screenNames';
 import {fonts} from '../../constants/fonts';
 
+
 export interface ISettings {
   timeStamp: boolean;
-  isDog: boolean;
-  sex: 'male' | 'female';
-  size: 'big' | 'medium' | 'small';
+  isDog: boolean | null;
+  sex: 'male' | 'female' | null;
+  size: 'big' | 'medium' | 'small' | null;
   age: string;
-  isVaccinated: boolean;
+  isVaccinated: boolean | null;
 }
 
 export default function Filter() {
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
+
   const [settings, setSettings] = useState<ISettings>({
     timeStamp: false,
-    isDog: true,
-    sex: 'male',
-    size: 'small',
-    age: '1',
-    isVaccinated: false,
+    isDog: null,
+    sex: null,
+    size: null,
+    age: '',
+    isVaccinated: null,
   });
-
-  const handleSwitchAnimal = (animal: {id: boolean}) => {
-    setSettings(prev => ({...prev, isDog: animal.id}));
-  };
-  const handleSwitchSex = (animal: {id: 'male' | 'female'}) => {
-    setSettings(prev => ({...prev, sex: animal.id}));
-  };
-  const handleSwitchSize = (animal: {id: 'big' | 'medium' | 'small'}) => {
-    setSettings(prev => ({...prev, size: animal.id}));
-  };
-  const onTimeStamp = () => {
-    setSettings(prev => ({
-      ...prev,
-      timeStamp: !prev.timeStamp,
-    }));
-  };
 
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.mainWrapper}>
         <TouchableOpacity
           style={styles.TimeStampBtn}
-          onPress={() => {
-            onTimeStamp();
-          }}
+          onPress={() =>
+            setSettings(prev => ({...prev, timeStamp: !prev.timeStamp}))
+          }
         >
           <View style={styles.activeTimeStamp}>
             {settings.timeStamp && <View style={styles.checkedTimeStampBtn} />}
           </View>
           <Text>Сортувати за датою додавання</Text>
         </TouchableOpacity>
-        <SwitchBtn
+
+        <SwitchBtn<boolean | null>
           active={settings.isDog}
-          handleSwitch={handleSwitchAnimal}
+          handleSwitch={opt => setSettings(prev => ({...prev, isDog: opt.id}))}
           items={[
             {text: 'Собаки', id: true},
             {text: 'Коти', id: false},
           ]}
         />
-        <SwitchBtn
+
+        <SwitchBtn<'male' | 'female' | null>
           active={settings.sex}
-          handleSwitch={handleSwitchSex}
+          handleSwitch={opt => setSettings(prev => ({...prev, sex: opt.id}))}
           items={[
             {text: 'Хлопець', icon: <Male />, id: 'male'},
             {text: 'Дівчина', icon: <FemaleIcon />, id: 'female'},
-            {text: 'Будь-хто', icon: <MaleAndFemaleIcon />, id: 'any'},
+            {text: 'Будь-хто', icon: <MaleAndFemaleIcon />, id: null},
           ]}
         />
-        <SwitchBtn
+
+        <SwitchBtn<'big' | 'medium' | 'small' | null>
           active={settings.size}
-          handleSwitch={handleSwitchSize}
+          handleSwitch={opt => setSettings(prev => ({...prev, size: opt.id}))}
           items={[
             {text: 'Маленькі', id: 'small'},
             {text: 'Середні', id: 'medium'},
             {text: 'Великі', id: 'big'},
           ]}
         />
+
         <View style={styles.ageWrapper}>
           <Text style={styles.labelText}>Вік, роки</Text>
           <View style={styles.ageInputWrapper}>
@@ -108,11 +98,17 @@ export default function Filter() {
               style={styles.ageInput}
               placeholder={'1'}
               keyboardType={'numeric'}
-              value={settings.age.toString()}
-              onChangeText={text => setSettings(prev => ({...prev, age: text}))}
+              value={settings.age}
+              onChangeText={text =>
+                setSettings(prev => ({
+                  ...prev,
+                  age: text,
+                }))
+              }
             />
           </View>
         </View>
+
         <View style={styles.isVaccinatedWrapper}>
           <Text style={styles.labelText}>Вакцинація</Text>
           <TouchableOpacity
@@ -121,27 +117,33 @@ export default function Filter() {
               settings.isVaccinated && styles.isVaccinatedTrue,
             ]}
             onPress={() =>
-              setSettings(prev => ({...prev, isVaccinated: !prev.isVaccinated}))
+              setSettings(prev => {
+                if (prev.isVaccinated === null) {
+                  return {...prev, isVaccinated: true};
+                }
+                if (prev.isVaccinated === true) {
+                  return {...prev, isVaccinated: false};
+                }
+                return {...prev, isVaccinated: null};
+              })
             }
           >
             <View style={styles.isVaccinatedCircle} />
           </TouchableOpacity>
         </View>
+
         <DefaultBtn
           text={'Показати варіанти'}
           onPress={() => {
-            navigation.navigate(
-              ScreenNames.DRAWER_STACK,
-              {
-                screen: ScreenNames.TAB_BAR_STACK,
+            navigation.navigate(ScreenNames.DRAWER_STACK, {
+              screen: ScreenNames.TAB_BAR_STACK,
+              params: {
+                screen: ScreenNames.HOME_PAGE,
                 params: {
-                  screen: ScreenNames.HOME_PAGE,
-                  params: {
-                    settings: settings,
-                  },
+                  settings: settings,
                 },
               },
-            );
+            });
           }}
         />
       </View>

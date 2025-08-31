@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useEffect, useState} from 'react';
 import {SearchIcon, SettingsIcon} from '../../../assets/icons';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -14,19 +13,17 @@ import {ScreenNames} from '../../../constants/screenNames';
 import {IPets} from '../../../screen/Home';
 
 interface ISearchBar {
-  handleSearch: (text: string) => void;
+  searchValue: string;
+  onSearchChange: (text: string) => void;
   pets: IPets[];
 }
 
-export default function SearchBar({handleSearch, pets}: ISearchBar) {
-  const [name, setName] = useState('');
+export default function SearchBar({
+  searchValue,
+  onSearchChange,
+  pets,
+}: ISearchBar) {
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      handleSearch(name);
-    }, 500);
-    return () => clearTimeout(timeout);
-  }, [handleSearch, name]);
 
   const handleGoToFilter = () => {
     navigation.navigate(ScreenNames.FILTER_PAGE, {petList: pets});
@@ -40,8 +37,8 @@ export default function SearchBar({handleSearch, pets}: ISearchBar) {
         <TextInput
           placeholder="Пошук"
           style={styles.input}
-          value={name}
-          onChangeText={(text: string) => setName(text.trim())}
+          value={searchValue}
+          onChangeText={onSearchChange}
         />
       </View>
       <TouchableOpacity style={styles.settingsIcon} onPress={handleGoToFilter}>

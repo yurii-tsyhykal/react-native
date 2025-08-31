@@ -1,12 +1,4 @@
-import {
-  collection,
-  endAt,
-  getDocs,
-  orderBy,
-  query,
-  QuerySnapshot,
-  startAt,
-} from 'firebase/firestore';
+import {collection, getDocs, query, QuerySnapshot} from 'firebase/firestore';
 import {useEffect, useState} from 'react';
 import PetsList from '../../common/components/PetList/PetsList';
 import {StyleSheet, View} from 'react-native';
@@ -14,6 +6,7 @@ import {db} from '../../config/firebaseConfig';
 import SearchBar from '../../common/components/SearchBar/SearchBar';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {ISettings} from '../Filter';
+import algoliaFetch from '../../utils/algoliaFetch';
 
 export interface IPets {
   age: number;
@@ -37,53 +30,48 @@ function extractData(snapshot: QuerySnapshot): IPets[] {
 
 export default function HomePage() {
   const [pets, setPets] = useState<IPets[]>([]);
+  const [searchText, setSearchText] = useState('');
   const route = useRoute<RouteProp<{params: {settings: ISettings}}>>();
-  console.log(route);
+  const filterSettings = route.params?.settings;
 
-  const getData = async () => {
-    try {
+  useEffect(() => {
+    const handleSearch = async () => {
+      if (searchText.trim().length > 0) {
+        const result = await algoliaFetch({
+          text: searchText,
+          attributes: ['type'],
+        });
+        setPets(result);
+        return;
+      }
+
+      if (filterSettings) {
+        const result = await algoliaFetch({
+          text: '',
+          filter: filterSettings ?? undefined,
+        });
+        setPets(result);
+        return;
+      }
+
       const q = query(collection(db, 'animals'));
       const querySnapshot = await getDocs(q);
 
       const result = extractData(querySnapshot);
       setPets(result);
-    } catch (error) {
-      console.log(`ERROR: ${error}`);
-    }
-  };
-  const handleSearch = async (text: string) => {
-    if (text.trim().length === 0) {
-      return;
-    }
-    const toUpper = text.charAt(0).toUpperCase() + text.slice(1);
-    try {
-      const q = query(
-        collection(db, 'animals'),
-        orderBy('type'),
-        startAt(toUpper),
-        endAt(toUpper + '\uf8ff'),
-      );
-      const querySnapshot = await getDocs(q);
-      const result = extractData(querySnapshot);
-      setPets(result);
-    } catch (error) {
-      console.log(`ERROR: ${error}`);
-    }
-  };
-
-  const handleSearchWithFilter = async (settings: ISettings) => {
-    try {
-    } catch (error) {
-      console.log(`ERROR FILTER: ${error}`);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+    };
+    const timeout = setTimeout(() => {
+      handleSearch();
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [filterSettings, searchText]);
   return (
     <View style={styles.wrapper}>
-      <SearchBar handleSearch={handleSearch} />
+      <SearchBar
+        searchValue={searchText}
+        onSearchChange={setSearchText}
+        pets={pets}
+      />
       <PetsList pets={pets} />
     </View>
   );

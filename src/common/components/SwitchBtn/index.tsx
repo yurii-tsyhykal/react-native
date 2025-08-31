@@ -1,17 +1,26 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {fonts} from '../../../constants/fonts';
+import { JSX } from 'react';
 
-interface IItems {
-  items: {
-    text: string;
-    icon?: JSX.Element;
-    id: string | boolean;
-  }[];
-  active: string | boolean;
-  handleSwitch: (text: {id: string | boolean}) => void;
+type OptionId = string | boolean | null;
+
+export interface SwitchItem<T extends OptionId> {
+  text: string;
+  icon?: JSX.Element;
+  id: T;
 }
 
-export default function SwitchBtn({items, active, handleSwitch}: IItems) {
+export interface SwitchBtnProps<T extends OptionId> {
+  items: Array<SwitchItem<T>>;
+  active: T;
+  handleSwitch: (item: SwitchItem<T>) => void;
+}
+
+export default function SwitchBtn<T extends OptionId>({
+  items,
+  active,
+  handleSwitch,
+}: SwitchBtnProps<T>) {
   return (
     <View style={styles.switcherWrapper}>
       {items.map((i, index) => (
@@ -36,6 +45,8 @@ export default function SwitchBtn({items, active, handleSwitch}: IItems) {
     </View>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   switcherWrapper: {
