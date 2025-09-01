@@ -6,6 +6,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import DrawerStack from '../DrawerStack';
 import Filter from '../../screen/Filter';
 import FilterHeader from '../../common/components/FilterHeader';
+import PetPage from '../../screen/Pet';
 
 const Stack = createNativeStackNavigator<LoggedInStackType>();
 
@@ -26,6 +27,7 @@ export default function LoggedInStack() {
           name={ScreenNames.FILTER_PAGE}
           component={Filter}
         />
+        <Stack.Screen name={ScreenNames.PET_PAGE} component={PetPage} />
       </Stack.Navigator>
     </SafeAreaView>
   );

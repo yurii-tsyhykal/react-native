@@ -8,4 +8,5 @@ export enum ScreenNames {
   FAVORITE_PAGE = 'FAVORITE_PAGE',
   DRAWER_STACK = 'DRAWER_STACK',
   FILTER_PAGE = 'FILTER_PAGE',
+  PET_PAGE = 'PET_PAGE',
 }

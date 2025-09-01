@@ -2,6 +2,7 @@ import {Platform, StyleSheet} from 'react-native';
 import {fonts} from '../../constants/fonts';
 
 export default StyleSheet.create({
+  appWrapper: {flex: 1},
   mainWrapper: {
     flex: 1,
   },
