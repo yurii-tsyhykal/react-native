@@ -14,14 +14,13 @@ import {useState} from 'react';
 import SwitchBtn from '../../common/components/SwitchBtn';
 import {
   FemaleIcon,
-  Male,
+  MaleIcon,
   MaleAndFemaleIcon,
   SearchIcon,
 } from '../../assets/icons';
 import DefaultBtn from '../../common/components/DefaultBtn';
 import {ScreenNames} from '../../constants/screenNames';
 import {fonts} from '../../constants/fonts';
-
 
 export interface ISettings {
   timeStamp: boolean;
@@ -72,7 +71,7 @@ export default function Filter() {
           active={settings.sex}
           handleSwitch={opt => setSettings(prev => ({...prev, sex: opt.id}))}
           items={[
-            {text: 'Хлопець', icon: <Male />, id: 'male'},
+            {text: 'Хлопець', icon: <MaleIcon />, id: 'male'},
             {text: 'Дівчина', icon: <FemaleIcon />, id: 'female'},
             {text: 'Будь-хто', icon: <MaleAndFemaleIcon />, id: null},
           ]}

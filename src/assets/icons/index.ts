@@ -10,7 +10,9 @@ import SearchIcon from './SearchIcon';
 import SettingsIcon from './SettingsIcon';
 import MaleAndFemaleIcon from './MaleAndFemaleIcon';
 import FemaleIcon from './FemaleIcon';
-import Male from './Male';
+import MaleIcon from './MaleIcon';
+import SliderArrowIcon from './SliderArrowIcon';
+import LocationIcon from './LocationIcon';
 
 export {
   VisibleIcon,
@@ -25,5 +27,7 @@ export {
   SettingsIcon,
   MaleAndFemaleIcon,
   FemaleIcon,
-  Male,
+  MaleIcon,
+  SliderArrowIcon,
+  LocationIcon,
 };
