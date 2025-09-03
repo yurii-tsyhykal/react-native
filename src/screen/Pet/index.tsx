@@ -13,12 +13,12 @@ import {LoggedInStackType} from '../../navigation/types';
 import {
   ArrowIcon,
   FavoriteIcon,
-  HeartIcon,
   LocationIcon,
   SliderArrowIcon,
 } from '../../assets/icons';
 import {useState} from 'react';
 import {fonts} from '../../constants/fonts';
+import DefaultBtn from '../../common/components/DefaultBtn';
 
 export default function PetPage() {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
@@ -29,14 +29,31 @@ export default function PetPage() {
   const handleGoBack = () => {
     navigation.goBack();
   };
+  const handleNext = () => {
+    if (sliderIndex + 1 < route?.params?.pet?.images.length) {
+      setSliderIndex(prevState => prevState + 1);
+    } else {
+      setSliderIndex(0);
+    }
+  };
 
   const handlePrev = () => {
     if (sliderIndex - 1 >= 0) {
       setSliderIndex(prevState => prevState - 1);
     } else {
-      setSliderIndex(pet.images.length);
+      setSliderIndex(pet.images.length - 1);
     }
   };
+  if (!pet) {
+    return (
+      <View style={styles.noPet}>
+        <Text>Немає даних про тварину</Text>
+        <TouchableOpacity onPress={handleGoBack}>
+          <Text style={styles.noPetBtnText}>Повернутись назад</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -71,7 +88,10 @@ export default function PetPage() {
                   />
                 ))}
               </View>
-              <TouchableOpacity style={styles.sliderArrowBtnRight}>
+              <TouchableOpacity
+                onPress={handleNext}
+                style={styles.sliderArrowBtnRight}
+              >
                 <SliderArrowIcon />
               </TouchableOpacity>
             </View>
@@ -86,31 +106,40 @@ export default function PetPage() {
                 <Text style={styles.locationText}>{pet.location}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.favContainer}>
+            <TouchableOpacity style={styles.favBtn}>
               <FavoriteIcon />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity>
-            <HeartIcon />
-          </TouchableOpacity>
-        </View>
-        <View>
-          <Text></Text>
-          <View>
-            <Text></Text>
+
+          <View style={styles.charactersContainer}>
+            <Text style={styles.charactersTitle}>Характеристики:</Text>
+            <View style={styles.characterContainer}>
+              <View style={styles.characterWrapper}>
+                <Text style={styles.characterText}>{`${pet.age} років`}</Text>
+              </View>
+              <View style={styles.characterWrapper}>
+                <Text style={styles.characterText}>{pet.color}</Text>
+              </View>
+              <View style={styles.characterWrapper}>
+                <Text style={styles.characterText}>{pet.type}</Text>
+              </View>
+              <View style={styles.characterWrapper}>
+                <Text style={styles.characterText}>{pet.sex}</Text>
+              </View>
+              <View style={styles.characterWrapper}>
+                <Text style={styles.characterText}>
+                  {pet.isVaccinated ? 'Вакцинований' : 'Не вакцинований'}
+                </Text>
+              </View>
+            </View>
           </View>
-          <View>
-            <Text></Text>
+          <View style={styles.nameWrapper}>
+            <Text style={styles.charactersTitle}>Опис:</Text>
+            <View>
+              <Text style={styles.characterText}>{pet.description}</Text>
+            </View>
           </View>
-          <View>
-            <Text></Text>
-          </View>
-          <View>
-            <Text></Text>
-          </View>
-          <View>
-            <Text></Text>
-          </View>
+          <DefaultBtn onPress={() => {}} text={'Подарувати сім’ю'} />
         </View>
       </View>
     </ScrollView>
@@ -118,6 +147,12 @@ export default function PetPage() {
 }
 
 const styles = StyleSheet.create({
+  noPet: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  noPetBtnText: {color: 'blue', fontSize: 20, padding: 20},
   scrollView: {flex: 1},
   bgImage: {width: '100%', height: 400},
   mainContainer: {
@@ -176,7 +211,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#838383',
   },
-  favContainer: {
+  favBtn: {
     alignSelf: 'flex-start',
     alignItems: 'center',
     justifyContent: 'center',
@@ -186,4 +221,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#EAE9FB',
   },
+  charactersContainer: {marginHorizontal: 10, gap: 10},
+  charactersTitle: {fontFamily: fonts.ComfortaaRegular, fontSize: 18},
+  characterContainer: {flexDirection: 'row', flexWrap: 'wrap', gap: 8},
+  characterWrapper: {
+    borderRadius: 50,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    backgroundColor: '#EAE9FB',
+  },
+  characterText: {fontFamily: fonts.MontserratRegular, color: 'black'},
 });
