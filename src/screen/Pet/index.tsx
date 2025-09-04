@@ -19,6 +19,8 @@ import {
 import {useState} from 'react';
 import {fonts} from '../../constants/fonts';
 import DefaultBtn from '../../common/components/DefaultBtn';
+import Modal from 'react-native-modal';
+import ApplicationForm from '../../common/components/ApplicationForm';
 
 export default function PetPage() {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
@@ -142,6 +144,11 @@ export default function PetPage() {
           <DefaultBtn onPress={() => {}} text={'Подарувати сім’ю'} />
         </View>
       </View>
+      <Modal isVisible={true}>
+        <View style={styles.modalContainer}>
+          <ApplicationForm />
+        </View>
+      </Modal>
     </ScrollView>
   );
 }
@@ -231,4 +238,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#EAE9FB',
   },
   characterText: {fontFamily: fonts.MontserratRegular, color: 'black'},
+  modalContainer: {
+    width: '100%',
+    height: 600,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 20,
+    gap: 20,
+  },
 });
