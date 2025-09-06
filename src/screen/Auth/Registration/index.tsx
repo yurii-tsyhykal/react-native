@@ -5,7 +5,7 @@ import {View} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import Input from '../../../common/components/Input';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {registerSchema} from '../utils/schemas';
+import {registerSchema} from '../../../schemas/schemas';
 import DefaultBtn from '../../../common/components/DefaultBtn';
 import styles from '../styles';
 import {

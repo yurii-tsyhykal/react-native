@@ -1,7 +1,15 @@
 import React, {useState} from 'react';
-import {Text, TextInput, TouchableOpacity, View, ViewStyle} from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
 import {NotVisibleIcon, VisibleIcon} from '../../../assets/icons';
-import styles from '../../../screen/Auth/styles';
+import {fonts} from '../../../constants/fonts';
 
 export interface IInput {
   onBlur?: () => void;
@@ -14,6 +22,10 @@ export interface IInput {
   additionalContainerStyle?: ViewStyle;
   additionalInputStyle?: ViewStyle;
   confirmPwdStyle?: ViewStyle;
+  isAppForm?: boolean;
+  labelName?: string;
+  additionalLabelNameStyle?: ViewStyle;
+  numberOfLines?: number;
   onFocus?: () => void;
 }
 
@@ -29,11 +41,20 @@ export default function Input({
   additionalInputStyle,
   confirmPwdStyle,
   onFocus,
+  isAppForm,
+  labelName,
+  additionalLabelNameStyle,
+  numberOfLines = 1,
 }: IInput) {
   const [isVisiblePassword, setIsVisiblePassword] = useState(secureTextEntry);
 
   return (
     <View style={confirmPwdStyle}>
+      {isAppForm && (
+        <Text style={[styles.labelName, additionalLabelNameStyle]}>
+          {labelName}
+        </Text>
+      )}
       <View style={[styles.inputContainer, additionalContainerStyle]}>
         <TextInput
           placeholder={placeholder}
@@ -44,11 +65,13 @@ export default function Input({
           value={value}
           onChangeText={text => onChangeText(text)}
           secureTextEntry={isVisiblePassword}
+          numberOfLines={numberOfLines}
         />
         {secureTextEntry && (
           <TouchableOpacity
             onPress={() => setIsVisiblePassword(!isVisiblePassword)}
-            hitSlop={15}>
+            hitSlop={15}
+          >
             {isVisiblePassword ? (
               <NotVisibleIcon fill={'#000000'} />
             ) : (
@@ -65,3 +88,36 @@ export default function Input({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  inputContainer: {
+    borderWidth: 1,
+    borderRadius: 25,
+    margin: 0,
+    paddingVertical: Platform.select({
+      android: 0,
+      ios: 14,
+      default: 0,
+    }),
+    paddingHorizontal: 24,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  labelName: {fontFamily: fonts.MontserratMedium, paddingLeft: 24},
+  input: {
+    width: '100%',
+    paddingVertical: 12,
+  },
+  errorTextContainer: {
+    height: 12,
+    position: 'relative',
+    padding: 0,
+  },
+  errorText: {
+    color: 'red',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  },
+});

@@ -244,6 +244,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 20,
+    paddingRight: 35,
     gap: 20,
   },
 });
