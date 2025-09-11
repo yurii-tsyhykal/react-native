@@ -24,6 +24,7 @@ import ApplicationForm from '../../common/components/ApplicationForm';
 
 export default function PetPage() {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
+  const [isVisible, setIsVisible] = useState(false);
   const route = useRoute<RouteProp<{params: {pet: IPets}}>>();
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
   const pet = route?.params?.pet;
@@ -46,6 +47,8 @@ export default function PetPage() {
       setSliderIndex(pet.images.length - 1);
     }
   };
+
+  const handleOnCloseModal = () => setIsVisible(prev => !prev);
   if (!pet) {
     return (
       <View style={styles.noPet}>
@@ -141,13 +144,16 @@ export default function PetPage() {
               <Text style={styles.characterText}>{pet.description}</Text>
             </View>
           </View>
-          <DefaultBtn onPress={() => {}} text={'Подарувати сім’ю'} />
+          <DefaultBtn
+            onPress={() => {
+              handleOnCloseModal();
+            }}
+            text={'Подарувати сім’ю'}
+          />
         </View>
       </View>
-      <Modal isVisible={true}>
-        <View style={styles.modalContainer}>
-          <ApplicationForm />
-        </View>
+      <Modal isVisible={isVisible} onBackdropPress={() => handleOnCloseModal()}>
+        <ApplicationForm onClose={() => setIsVisible(false)} />
       </Modal>
     </ScrollView>
   );
@@ -238,13 +244,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#EAE9FB',
   },
   characterText: {fontFamily: fonts.MontserratRegular, color: 'black'},
-  modalContainer: {
-    width: '100%',
-    height: 600,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 20,
-    paddingRight: 35,
-    gap: 20,
-  },
 });

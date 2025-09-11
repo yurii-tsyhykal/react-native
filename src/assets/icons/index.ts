@@ -13,6 +13,7 @@ import FemaleIcon from './FemaleIcon';
 import MaleIcon from './MaleIcon';
 import SliderArrowIcon from './SliderArrowIcon';
 import LocationIcon from './LocationIcon';
+const DogImage = require('./images/dogImage.png');
 
 export {
   VisibleIcon,
@@ -30,4 +31,5 @@ export {
   MaleIcon,
   SliderArrowIcon,
   LocationIcon,
+  DogImage,
 };
