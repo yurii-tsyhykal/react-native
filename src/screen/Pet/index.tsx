@@ -21,10 +21,12 @@ import {fonts} from '../../constants/fonts';
 import DefaultBtn from '../../common/components/DefaultBtn';
 import Modal from 'react-native-modal';
 import ApplicationForm from '../../common/components/ApplicationForm';
+import {useFavorites} from '../../context/favoritesContext';
 
 export default function PetPage() {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
   const [isVisible, setIsVisible] = useState(false);
+  const {isFavorite, toggleFavorite} = useFavorites();
   const route = useRoute<RouteProp<{params: {pet: IPets}}>>();
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
   const pet = route?.params?.pet;
@@ -111,8 +113,11 @@ export default function PetPage() {
                 <Text style={styles.locationText}>{pet.location}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.favBtn}>
-              <FavoriteIcon />
+            <TouchableOpacity
+              onPress={() => toggleFavorite(pet)}
+              style={styles.favBtn}
+            >
+              <FavoriteIcon isFavorite={isFavorite(pet)} />
             </TouchableOpacity>
           </View>
 

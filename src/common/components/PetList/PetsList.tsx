@@ -14,8 +14,10 @@ import {useNavigation} from '@react-navigation/native';
 import {ScreenNames} from '../../../constants/screenNames';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LoggedInStackType} from '../../../navigation/types';
+import {useFavorites} from '../../../context/favoritesContext';
 
 export default function PetsList({pets}: {pets: IPets[]}) {
+  const {isFavorite, toggleFavorite} = useFavorites();
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
   const handleToPetPage = (petItem: IPets) => {
     navigation.navigate(ScreenNames.PET_PAGE, {pet: petItem});
@@ -40,8 +42,11 @@ export default function PetsList({pets}: {pets: IPets[]}) {
                 style={styles.image}
                 resizeMode="cover"
               >
-                <TouchableOpacity style={styles.favIconBtn}>
-                  <FavoriteIcon />
+                <TouchableOpacity
+                  onPress={() => toggleFavorite(item)}
+                  style={styles.favIconBtn}
+                >
+                  <FavoriteIcon isFavorite={isFavorite(item)} />
                 </TouchableOpacity>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>{item.type}</Text>
