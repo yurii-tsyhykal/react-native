@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import {IPets} from '../screen/Home';
@@ -16,9 +17,7 @@ interface FavoritesContextType {
   isLoading: boolean;
 }
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(
-  undefined,
-);
+const FavoritesContext = createContext<FavoritesContextType | null>(null);
 
 export const FavoriteProvider = ({children}: {children: ReactNode}) => {
   const [favorites, setFavorites] = useState<IPets[]>([]);
@@ -61,7 +60,10 @@ export const FavoriteProvider = ({children}: {children: ReactNode}) => {
     [favorites],
   );
 
-  const value = {favorites, toggleFavorite, isFavorite, isLoading};
+  const value = useMemo(
+    () => ({favorites, toggleFavorite, isFavorite, isLoading}),
+    [favorites, isFavorite, isLoading, toggleFavorite],
+  );
   return (
     <FavoritesContext.Provider value={value}>
       {children}
@@ -71,7 +73,7 @@ export const FavoriteProvider = ({children}: {children: ReactNode}) => {
 
 export const useFavorites = () => {
   const context = useContext(FavoritesContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useFavorites must be used within a FavoriteProvider');
   }
   return context;

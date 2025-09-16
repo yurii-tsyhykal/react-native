@@ -16,12 +16,12 @@ import {
   LocationIcon,
   SliderArrowIcon,
 } from '../../assets/icons';
-import {useState} from 'react';
+import { useState} from 'react';
 import {fonts} from '../../constants/fonts';
 import DefaultBtn from '../../common/components/DefaultBtn';
 import Modal from 'react-native-modal';
 import ApplicationForm from '../../common/components/ApplicationForm';
-import {useFavorites} from '../../context/favoritesContext';
+import {useFavorites} from '../../context/FavoritesContext';
 
 export default function PetPage() {
   const [sliderIndex, setSliderIndex] = useState<number>(0);

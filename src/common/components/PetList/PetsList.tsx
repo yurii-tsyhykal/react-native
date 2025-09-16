@@ -14,7 +14,7 @@ import {useNavigation} from '@react-navigation/native';
 import {ScreenNames} from '../../../constants/screenNames';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LoggedInStackType} from '../../../navigation/types';
-import {useFavorites} from '../../../context/favoritesContext';
+import {useFavorites} from '../../../context/FavoritesContext';
 
 export default function PetsList({pets}: {pets: IPets[]}) {
   const {isFavorite, toggleFavorite} = useFavorites();

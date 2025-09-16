@@ -1,6 +1,6 @@
 import {ActivityIndicator} from 'react-native';
 import PetsList from '../../common/components/PetList/PetsList';
-import {useFavorites} from '../../context/favoritesContext';
+import {useFavorites} from '../../context/FavoritesContext';
 
 export default function FavoritePage() {
   const {favorites, isLoading} = useFavorites();

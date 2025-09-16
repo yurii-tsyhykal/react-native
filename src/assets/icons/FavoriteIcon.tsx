@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, {ClipPath, Defs, G, Path, Rect} from 'react-native-svg';
 
-export default ({isFavorite}) => {
+export default ({isFavorite = false}) => {
   return (
     <Svg width="36" height="36" fill="none" viewBox="0 0 36 36">
       <Rect width="36" height="36" fill="#fff" rx="8" />
