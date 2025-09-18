@@ -3,11 +3,6 @@ import DefaultBtn from '../DefaultBtn';
 import {fonts} from '../../../constants/fonts';
 import {FallbackProps} from 'react-error-boundary';
 
-type IErrorFallBack = {
-  error: Error;
-  resetError: () => void;
-};
-
 export default function ErrorFallBack({
   error,
   resetErrorBoundary,
