@@ -6,6 +6,7 @@ import styles from './src/screen/Auth/styles';
 import {FavoriteProvider} from './src/context/FavoritesContext';
 import ErrorFallBack from './src/common/components/ErrorFallBack';
 import {ErrorBoundary} from 'react-error-boundary';
+import './src/i18n/index';
 
 function App(): React.JSX.Element {
   return (
