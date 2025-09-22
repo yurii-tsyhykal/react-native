@@ -13,6 +13,9 @@ import FemaleIcon from './FemaleIcon';
 import MaleIcon from './MaleIcon';
 import SliderArrowIcon from './SliderArrowIcon';
 import LocationIcon from './LocationIcon';
+import PLIcon from './PLIcon';
+import UKIcon from './UKIcon';
+import ENIcon from './ENIcon';
 const DogImage = require('./images/dogImage.png');
 
 export {
@@ -32,4 +35,7 @@ export {
   SliderArrowIcon,
   LocationIcon,
   DogImage,
+  PLIcon,
+  UKIcon,
+  ENIcon,
 };

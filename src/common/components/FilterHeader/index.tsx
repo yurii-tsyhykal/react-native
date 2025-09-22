@@ -5,7 +5,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {LoggedInStackType} from '../../../navigation/types';
 import {fonts} from '../../../constants/fonts';
 
-export default function FilterHeader() {
+export default function FilterHeader({title = 'Фільтри'}) {
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
   return (
     <View style={styles.wrapper}>
@@ -15,7 +15,9 @@ export default function FilterHeader() {
       >
         <ArrowIcon width={20} height={20} />
       </TouchableOpacity>
-      <Text style={styles.title}>Фільтри</Text>
+      <Text style={[styles.title, title !== 'Фільтри' && styles.titleLng]}>
+        {title}
+      </Text>
     </View>
   );
 }
@@ -36,4 +38,5 @@ const styles = StyleSheet.create({
     fontFamily: fonts.MontserratSemiBold,
     color: 'black',
   },
+  titleLng: {flex: 0.73},
 });

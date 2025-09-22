@@ -3,13 +3,14 @@ import {View} from 'react-native';
 import {HeartIcon, PawIcon} from '../../assets/icons';
 import {ScreenNames} from '../../constants/screenNames';
 import {Text} from 'react-native-gesture-handler';
+import {i18n} from '../../i18n';
 
 const getName = (name: string) => {
   switch (name) {
     case ScreenNames.HOME_PAGE:
-      return 'Пухнастики';
+      return i18n.t('navigation.tabBar.pets');
     case ScreenNames.FAVORITE_PAGE:
-      return 'Улюблені';
+      return i18n.t('navigation.tabBar.favorites');
   }
 };
 
@@ -36,7 +37,6 @@ export default function TabBarOptions(route: {
       justifyContent: 'center',
     },
     tabBarStyle: {
-      // height: 82,
       backgroundColor: '#E5F3E5',
       borderTopRightRadius: 50,
       borderTopLeftRadius: 50,

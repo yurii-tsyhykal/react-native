@@ -1,1 +1,15 @@
-{}
+{
+  "common": {},
+  "auth": {},
+  "home": {},
+  "filter": {},
+  "petPage": {},
+  "appForm": {},
+  "navigation": {
+    "tabBar": {
+      "pets": "Пухнастики",
+      "favorites": "Улюблені"
+    }
+  },
+  "drawer": {}
+}

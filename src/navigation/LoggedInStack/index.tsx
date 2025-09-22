@@ -7,6 +7,7 @@ import DrawerStack from '../DrawerStack';
 import Filter from '../../screen/Filter';
 import FilterHeader from '../../common/components/FilterHeader';
 import PetPage from '../../screen/Pet';
+import LanguagesPage from '../../screen/Languages';
 
 const Stack = createNativeStackNavigator<LoggedInStackType>();
 
@@ -28,6 +29,10 @@ export default function LoggedInStack() {
           component={Filter}
         />
         <Stack.Screen name={ScreenNames.PET_PAGE} component={PetPage} />
+        <Stack.Screen
+          name={ScreenNames.LANGUAGES_PAGE}
+          component={LanguagesPage}
+        />
       </Stack.Navigator>
     </SafeAreaView>
   );

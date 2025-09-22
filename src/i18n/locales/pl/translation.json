@@ -1,1 +1,10 @@
-{}
+{
+  "common": {},
+  "auth": {},
+  "home": {},
+  "filter": {},
+  "petPage": {},
+  "appForm": {},
+  "navigation": {},
+  "drawer": {}
+}
