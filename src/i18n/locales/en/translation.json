@@ -1,10 +1,17 @@
 {
-  "common": {},
+  "common": {
+    "searchPlaceHolder": "Search"
+  },
   "auth": {},
   "home": {},
   "filter": {},
   "petPage": {},
   "appForm": {},
-  "navigation": {},
+  "navigation": {
+    "tabBar": {
+      "pets": "Fluffies",
+      "favorites": "Favorites"
+    }
+  },
   "drawer": {}
 }

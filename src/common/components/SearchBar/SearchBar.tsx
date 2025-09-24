@@ -11,6 +11,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {LoggedInStackType} from '../../../navigation/types';
 import {ScreenNames} from '../../../constants/screenNames';
 import {IPets} from '../../../screen/Home';
+import {useTranslation} from 'react-i18next';
 
 interface ISearchBar {
   searchValue: string;
@@ -24,6 +25,7 @@ export default function SearchBar({
   pets,
 }: ISearchBar) {
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
+  const {t} = useTranslation();
 
   const handleGoToFilter = () => {
     navigation.navigate(ScreenNames.FILTER_PAGE, {petList: pets});
@@ -35,7 +37,7 @@ export default function SearchBar({
           <SearchIcon width={16} height={16} />
         </View>
         <TextInput
-          placeholder="Пошук"
+          placeholder={t('common.searchPlaceHolder')}
           style={styles.input}
           value={searchValue}
           onChangeText={onSearchChange}

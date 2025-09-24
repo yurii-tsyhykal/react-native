@@ -16,6 +16,7 @@ import LocationIcon from './LocationIcon';
 import PLIcon from './PLIcon';
 import UKIcon from './UKIcon';
 import ENIcon from './ENIcon';
+import CheckIcon from './CheckIcon';
 const DogImage = require('./images/dogImage.png');
 
 export {
@@ -38,4 +39,5 @@ export {
   PLIcon,
   UKIcon,
   ENIcon,
+  CheckIcon,
 };

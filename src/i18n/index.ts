@@ -5,14 +5,14 @@ import i18next from 'i18next';
 import {initReactI18next} from 'react-i18next';
 
 const resources = {
+  uk: {
+    translation: uk,
+  },
   en: {
     translation: en,
   },
   pl: {
     translation: pl,
-  },
-  uk: {
-    translation: uk,
   },
 };
 
@@ -49,9 +49,13 @@ i18next
   .use(languageDetector)
   .use(initReactI18next)
   .init({
+    nonExplicitSupportedLngs: true,
+    supportedLngs: ['en', 'pl', 'uk'],
     compatibilityJSON: 'v4',
     resources,
     fallbackLng: 'en',
+    debug: true,
+    lng: 'uk',
     interpolation: {
       escapeValue: false,
     },

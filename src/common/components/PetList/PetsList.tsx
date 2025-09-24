@@ -15,10 +15,13 @@ import {ScreenNames} from '../../../constants/screenNames';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LoggedInStackType} from '../../../navigation/types';
 import {useFavorites} from '../../../context/FavoritesContext';
+import {useTranslation} from 'react-i18next';
 
 export default function PetsList({pets}: {pets: IPets[]}) {
   const {isFavorite, toggleFavorite} = useFavorites();
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
+  const {t} = useTranslation();
+
   const handleToPetPage = (petItem: IPets) => {
     navigation.navigate(ScreenNames.PET_PAGE, {pet: petItem});
   };
@@ -29,6 +32,8 @@ export default function PetsList({pets}: {pets: IPets[]}) {
         style={styles.mainContainer}
         numColumns={2}
         renderItem={({item}) => {
+          console.log('age:', item.age, typeof item.age);
+
           return (
             <TouchableOpacity
               style={styles.item}
@@ -50,7 +55,11 @@ export default function PetsList({pets}: {pets: IPets[]}) {
                 </TouchableOpacity>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>{item.type}</Text>
-                  <Text style={styles.text}>{`${item.age} years`}</Text>
+                  <Text style={styles.text}>
+                    {t('petPage.petAge', {
+                      count: item.age,
+                    })}
+                  </Text>
                 </View>
               </ImageBackground>
             </TouchableOpacity>

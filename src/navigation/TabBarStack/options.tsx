@@ -3,29 +3,31 @@ import {View} from 'react-native';
 import {HeartIcon, PawIcon} from '../../assets/icons';
 import {ScreenNames} from '../../constants/screenNames';
 import {Text} from 'react-native-gesture-handler';
-import {i18n} from '../../i18n';
-
-const getName = (name: string) => {
-  switch (name) {
-    case ScreenNames.HOME_PAGE:
-      return i18n.t('navigation.tabBar.pets');
-    case ScreenNames.FAVORITE_PAGE:
-      return i18n.t('navigation.tabBar.favorites');
-  }
-};
-
-const getIcon = (name: string, focused: boolean) => {
-  switch (name) {
-    case ScreenNames.HOME_PAGE:
-      return <PawIcon color={'#0B0B0B'} isFocused={focused} />;
-    case ScreenNames.FAVORITE_PAGE:
-      return <HeartIcon color={'#0B0B0B'} isFocused={focused} />;
-  }
-};
+import {useTranslation} from 'react-i18next';
 
 export default function TabBarOptions(route: {
   name: string;
 }): BottomTabNavigationOptions {
+  const {t} = useTranslation();
+
+  const getName = (name: string) => {
+    switch (name) {
+      case ScreenNames.HOME_PAGE:
+        return t('navigation.tabBar.pets');
+      case ScreenNames.FAVORITE_PAGE:
+        return t('navigation.tabBar.favorites');
+    }
+  };
+
+  const getIcon = (name: string, focused: boolean) => {
+    switch (name) {
+      case ScreenNames.HOME_PAGE:
+        return <PawIcon color={'#0B0B0B'} isFocused={focused} />;
+      case ScreenNames.FAVORITE_PAGE:
+        return <HeartIcon color={'#0B0B0B'} isFocused={focused} />;
+    }
+  };
+
   return {
     headerShown: false,
     tabBarShowLabel: true,

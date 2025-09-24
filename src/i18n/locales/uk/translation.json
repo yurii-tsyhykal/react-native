@@ -1,9 +1,18 @@
 {
-  "common": {},
+  "common": {
+    "searchPlaceHolder": "Пошук"
+  },
   "auth": {},
   "home": {},
   "filter": {},
-  "petPage": {},
+  "petPage": {
+    "petAge": {
+      "one": "{{count}} рік",
+      "few": "{{count}} роки",
+      "many": "{{count}} років",
+      "other": "{{count}} років"
+    }
+  },
   "appForm": {},
   "navigation": {
     "tabBar": {

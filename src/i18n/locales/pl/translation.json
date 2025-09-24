@@ -1,10 +1,17 @@
 {
-  "common": {},
+  "common": {
+    "searchPlaceHolder": "Szukaj"
+  },
   "auth": {},
   "home": {},
   "filter": {},
   "petPage": {},
   "appForm": {},
-  "navigation": {},
+  "navigation": {
+    "tabBar": {
+      "pets": "Futrzaki",
+      "favorites": "Ulubione "
+    }
+  },
   "drawer": {}
 }
