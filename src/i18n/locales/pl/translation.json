@@ -1,17 +1,38 @@
 {
   "common": {
-    "searchPlaceHolder": "Szukaj"
+    "searchPlaceHolder": "Szukaj",
+    "buttons": {
+      "petPage": "Adoptuj"
+    }
   },
   "auth": {},
   "home": {},
   "filter": {},
-  "petPage": {},
-  "appForm": {},
+  "petPage": {
+    "characters": "Charakterystyka",
+    "vaccinated": "Zaszczepiony",
+    "notVaccinated": "Nie zaszczepiony",
+    "description": "Opis:"
+  },
+  "appForm": {
+    "title": "Adoptuj zwierzaka",
+    "subtitle": "Zostaw swoje dane, a skontaktujemy się z Tobą",
+    "labelName": {
+      "name": "Imię",
+      "phone": "Telefon",
+      "email": "E-mail",
+      "comment": "Komentarz"
+    }
+  },
   "navigation": {
     "tabBar": {
       "pets": "Futrzaki",
       "favorites": "Ulubione "
     }
   },
-  "drawer": {}
+  "drawer": {
+    "website": "Nasza strona internetowa",
+    "language": "Ustawienia języka",
+    "logOut": "Wyloguj się"
+  }
 }

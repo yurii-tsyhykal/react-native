@@ -1,8 +1,12 @@
 import * as RNLocalize from 'react-native-localize';
-import {en, pl, uk} from './locales';
+import {en, pl, uk} from './locales/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18next from 'i18next';
 import {initReactI18next} from 'react-i18next';
+
+console.log('--- Debug: Loaded UK resources object ---');
+console.log(JSON.stringify(uk.petPage, null, 2)); // Виводимо лише частину, щоб не забивати консоль
+console.log('--- End Debug ---');
 
 const resources = {
   uk: {
@@ -33,6 +37,7 @@ const languageDetector = {
       callback(systemLang);
     } catch (error) {
       console.log('Error reading language from AsyncStorage', error);
+      callback('en');
     }
   },
   init: () => {},
@@ -49,15 +54,17 @@ i18next
   .use(languageDetector)
   .use(initReactI18next)
   .init({
-    nonExplicitSupportedLngs: true,
     supportedLngs: ['en', 'pl', 'uk'],
     compatibilityJSON: 'v4',
     resources,
     fallbackLng: 'en',
-    debug: true,
-    lng: 'uk',
+    debug: __DEV__,
+    lng: 'en',
     interpolation: {
       escapeValue: false,
+    },
+    react: {
+      useSuspense: false,
     },
   });
 

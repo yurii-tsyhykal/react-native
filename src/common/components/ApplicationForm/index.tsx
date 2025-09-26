@@ -7,6 +7,7 @@ import {applicationSchema} from '../../../schemas/schemas';
 import Input from '../Input';
 import DefaultBtn from '../DefaultBtn';
 import {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 
 interface IAppFormProps {
   onClose: () => void;
@@ -21,6 +22,7 @@ interface IAppForm {
 
 export default function ApplicationForm({onClose}: IAppFormProps) {
   const [modalContent, setModalContent] = useState<'success' | 'form'>('form');
+  const {t} = useTranslation();
 
   const {
     control,
@@ -47,10 +49,8 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
         <>
           <View style={styles.headerFormContainer}>
             <View style={styles.titleFormContainer}>
-              <Text style={styles.titleForm}>Забрати хвостика додому</Text>
-              <Text style={styles.subtitleForm}>
-                Залиште свої дані і ми з Вами зв'яжемося
-              </Text>
+              <Text style={styles.titleForm}>{t('appForm.title')}</Text>
+              <Text style={styles.subtitleForm}>{t('appForm.subtitle')}</Text>
             </View>
             <TouchableOpacity onPress={onClose} hitSlop={15}>
               <CloseIcon />
@@ -62,7 +62,7 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
             render={({field: {onChange, onBlur, value}}) => (
               <Input
                 isAppForm={true}
-                labelName={'Ім’я'}
+                labelName={t('appForm.labelName.name')}
                 onBlur={onBlur}
                 value={value}
                 onChangeText={onChange}
@@ -77,7 +77,7 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
             render={({field: {onChange, onBlur, value}}) => (
               <Input
                 isAppForm={true}
-                labelName={'Телефон'}
+                labelName={t('appForm.labelName.phone')}
                 onBlur={onBlur}
                 value={value}
                 onChangeText={onChange}
@@ -92,7 +92,7 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
             render={({field: {onChange, onBlur, value}}) => (
               <Input
                 isAppForm={true}
-                labelName={'Email'}
+                labelName={t('appForm.labelName.email')}
                 onBlur={onBlur}
                 value={value}
                 onChangeText={onChange}
@@ -107,7 +107,7 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
             render={({field: {onChange, onBlur, value}}) => (
               <Input
                 isAppForm={true}
-                labelName={'Коментар'}
+                labelName={t('appForm.labelName.comment')}
                 onBlur={onBlur}
                 value={value}
                 onChangeText={onChange}

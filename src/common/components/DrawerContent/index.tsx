@@ -6,9 +6,11 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LoggedInStackType} from '../../../navigation/types';
 import {ScreenNames} from '../../../constants/screenNames';
+import {useTranslation} from 'react-i18next';
 
 export default function DrawerContent({props}: any) {
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
+  const {t} = useTranslation();
 
   const handleToLngPage = () => {
     navigation.navigate(ScreenNames.LANGUAGES_PAGE);
@@ -18,15 +20,15 @@ export default function DrawerContent({props}: any) {
       <Header isOpenDrawer={true} navigation={props.navigation} />
       <View style={styles.wrapper}>
         <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnText}>Наш сайт</Text>
+          <Text style={styles.btnText}>{t('drawer.website')}</Text>
           <ArrowIcon />
         </TouchableOpacity>
         <TouchableOpacity onPress={handleToLngPage} style={styles.btn}>
-          <Text style={styles.btnText}>Налаштування мови</Text>
+          <Text style={styles.btnText}>{t('drawer.language')}</Text>
           <ArrowIcon />
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnText}>Вихід</Text>
+          <Text style={styles.btnText}>{t('drawer.logOut')}</Text>
         </TouchableOpacity>
       </View>
     </View>

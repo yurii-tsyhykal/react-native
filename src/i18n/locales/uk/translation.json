@@ -1,24 +1,38 @@
 {
   "common": {
-    "searchPlaceHolder": "Пошук"
+    "searchPlaceHolder": "Пошук",
+    "buttons": {
+      "petPage": "Подарувати сім’ю"
+    }
   },
   "auth": {},
   "home": {},
   "filter": {},
   "petPage": {
-    "petAge": {
-      "one": "{{count}} рік",
-      "few": "{{count}} роки",
-      "many": "{{count}} років",
-      "other": "{{count}} років"
+    "characters": "Характеристики:",
+    "vaccinated": "Вакцинований",
+    "notVaccinated": "Не вакцинований",
+    "description": "Опис:"
+  },
+  "appForm": {
+    "title": "Забрати хвостика додому",
+    "subtitle": "Залиште свої дані і ми з Вами зв'яжемося",
+    "labelName": {
+      "name": "Ім’я",
+      "phone": "Телефон",
+      "email": "Електронна пошта",
+      "comment": "Коментар"
     }
   },
-  "appForm": {},
   "navigation": {
     "tabBar": {
       "pets": "Пухнастики",
       "favorites": "Улюблені"
     }
   },
-  "drawer": {}
+  "drawer": {
+    "website": "Наш сайт",
+    "language": "Налаштування мови",
+    "logOut": "Вихід"
+  }
 }

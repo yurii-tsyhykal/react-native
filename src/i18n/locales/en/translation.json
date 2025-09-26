@@ -1,17 +1,38 @@
 {
   "common": {
-    "searchPlaceHolder": "Search"
+    "searchPlaceHolder": "Search",
+    "buttons": {
+      "petPage": "Give a home"
+    }
   },
   "auth": {},
   "home": {},
   "filter": {},
-  "petPage": {},
-  "appForm": {},
+  "petPage": {
+    "characters": "Characteristics",
+    "vaccinated": "Vaccinated",
+    "notVaccinated": "Not vaccinated",
+    "description": "Description:"
+  },
+  "appForm": {
+    "title": "Bring a pet home",
+    "subtitle": "Leave your details and we will contact you",
+    "labelName": {
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "comment": "Comment"
+    }
+  },
   "navigation": {
     "tabBar": {
       "pets": "Fluffies",
       "favorites": "Favorites"
     }
   },
-  "drawer": {}
+  "drawer": {
+    "website": "Our website",
+    "language": "Language settings",
+    "logOut": "Logout"
+  }
 }

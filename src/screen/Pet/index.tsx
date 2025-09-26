@@ -16,12 +16,14 @@ import {
   LocationIcon,
   SliderArrowIcon,
 } from '../../assets/icons';
-import { useState} from 'react';
+import {useState} from 'react';
 import {fonts} from '../../constants/fonts';
 import DefaultBtn from '../../common/components/DefaultBtn';
 import Modal from 'react-native-modal';
 import ApplicationForm from '../../common/components/ApplicationForm';
 import {useFavorites} from '../../context/FavoritesContext';
+import {useTranslation} from 'react-i18next';
+import {getLocalizedAge} from '../../utils/pluralHelper';
 
 export default function PetPage() {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
@@ -30,6 +32,12 @@ export default function PetPage() {
   const route = useRoute<RouteProp<{params: {pet: IPets}}>>();
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
   const pet = route?.params?.pet;
+
+  const {i18n, t} = useTranslation();
+
+  const getAge = (age: number): string => {
+    return getLocalizedAge(age, i18n.language);
+  };
 
   const handleGoBack = () => {
     navigation.goBack();
@@ -122,10 +130,12 @@ export default function PetPage() {
           </View>
 
           <View style={styles.charactersContainer}>
-            <Text style={styles.charactersTitle}>Характеристики:</Text>
+            <Text style={styles.charactersTitle}>
+              {t('petPage.characters')}
+            </Text>
             <View style={styles.characterContainer}>
               <View style={styles.characterWrapper}>
-                <Text style={styles.characterText}>{`${pet.age} років`}</Text>
+                <Text style={styles.characterText}>{getAge(pet.age)}</Text>
               </View>
               <View style={styles.characterWrapper}>
                 <Text style={styles.characterText}>{pet.color}</Text>
@@ -138,13 +148,17 @@ export default function PetPage() {
               </View>
               <View style={styles.characterWrapper}>
                 <Text style={styles.characterText}>
-                  {pet.isVaccinated ? 'Вакцинований' : 'Не вакцинований'}
+                  {pet.isVaccinated
+                    ? t('petPage.vaccinated')
+                    : t('petPage.notVaccinated')}
                 </Text>
               </View>
             </View>
           </View>
           <View style={styles.nameWrapper}>
-            <Text style={styles.charactersTitle}>Опис:</Text>
+            <Text style={styles.charactersTitle}>
+              {t('petPage.description')}
+            </Text>
             <View>
               <Text style={styles.characterText}>{pet.description}</Text>
             </View>
@@ -153,7 +167,7 @@ export default function PetPage() {
             onPress={() => {
               handleOnCloseModal();
             }}
-            text={'Подарувати сім’ю'}
+            text={t('common.buttons.petPage')}
           />
         </View>
       </View>
