@@ -2,7 +2,9 @@
   "common": {
     "searchPlaceHolder": "Search",
     "buttons": {
-      "petPage": "Give a home"
+      "petPage": "Give a home",
+      "appForm": "Submit",
+      "appFormSuccess": "Okay"
     }
   },
   "auth": {},
@@ -17,11 +19,25 @@
   "appForm": {
     "title": "Bring a pet home",
     "subtitle": "Leave your details and we will contact you",
-    "labelName": {
-      "name": "Name",
-      "phone": "Phone",
-      "email": "Email",
-      "comment": "Comment"
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter your name"
+    },
+    "phone": {
+      "label": "Phone number",
+      "placeholder": "+1"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email"
+    },
+    "comment": {
+      "label": "Comment",
+      "placeholder": "Leave your comment"
+    },
+    "success": {
+      "title": "Thank you for your application!",
+      "subtitle": "Congratulations! You're one step closer to getting a furry friend. We will contact you soon."
     }
   },
   "navigation": {

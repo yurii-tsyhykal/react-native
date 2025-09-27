@@ -59,7 +59,7 @@ i18next
     resources,
     fallbackLng: 'en',
     debug: __DEV__,
-    lng: 'en',
+    lng: 'pl',
     interpolation: {
       escapeValue: false,
     },

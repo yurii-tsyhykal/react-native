@@ -47,7 +47,7 @@ export default function Input({
   numberOfLines = 1,
 }: IInput) {
   const [isVisiblePassword, setIsVisiblePassword] = useState(secureTextEntry);
-
+  const isMultiline = numberOfLines > 1;
   return (
     <View style={confirmPwdStyle}>
       {isAppForm && (
@@ -58,14 +58,19 @@ export default function Input({
       <View style={[styles.inputContainer, additionalContainerStyle]}>
         <TextInput
           placeholder={placeholder}
-          style={[styles.input, additionalInputStyle]}
+          style={[
+            styles.input,
+            additionalInputStyle,
+            isMultiline && styles.multiline,
+          ]}
           placeholderTextColor={placeholderColor}
           onBlur={onBlur}
           onFocus={onFocus}
           value={value}
           onChangeText={text => onChangeText(text)}
           secureTextEntry={isVisiblePassword}
-          numberOfLines={numberOfLines}
+          numberOfLines={isMultiline ? numberOfLines : undefined}
+          multiline={isMultiline}
         />
         {secureTextEntry && (
           <TouchableOpacity
@@ -104,7 +109,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  labelName: {fontFamily: fonts.MontserratMedium, paddingLeft: 24},
+  labelName: {
+    fontFamily: fonts.MontserratMedium,
+    paddingLeft: 24,
+  },
   input: {
     width: '100%',
     paddingVertical: 12,
@@ -119,5 +127,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
+  },
+  multiline: {
+    textAlignVertical: 'top',
   },
 });

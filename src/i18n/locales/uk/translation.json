@@ -2,7 +2,9 @@
   "common": {
     "searchPlaceHolder": "Пошук",
     "buttons": {
-      "petPage": "Подарувати сім’ю"
+      "petPage": "Подарувати сім’ю",
+      "appForm": "Відправити",
+      "appFormSuccess": "Окей"
     }
   },
   "auth": {},
@@ -17,11 +19,25 @@
   "appForm": {
     "title": "Забрати хвостика додому",
     "subtitle": "Залиште свої дані і ми з Вами зв'яжемося",
-    "labelName": {
-      "name": "Ім’я",
-      "phone": "Телефон",
-      "email": "Електронна пошта",
-      "comment": "Коментар"
+    "name": {
+      "label": "Ім’я",
+      "placeholder": ""
+    },
+    "phone": {
+      "label": "Телефон",
+      "placeholder": "+380"
+    },
+    "email": {
+      "label": "Електронна пошта",
+      "placeholder": "Введіть свою пошту"
+    },
+    "comment": {
+      "label": "Коментар",
+      "placeholder": "Залиште свій коментар"
+    },
+    "success": {
+      "title": "Дякуємо за заявку!",
+      "subtitle": "Вітаємо! Ти на крок ближче до того щоб завести собі пухнастого друга. Ми скоро зв'яжемося з тобою."
     }
   },
   "navigation": {

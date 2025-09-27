@@ -62,11 +62,11 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
             render={({field: {onChange, onBlur, value}}) => (
               <Input
                 isAppForm={true}
-                labelName={t('appForm.labelName.name')}
+                labelName={t('appForm.name.label')}
                 onBlur={onBlur}
                 value={value}
                 onChangeText={onChange}
-                placeholder={'Введіть ваше ім’я'}
+                placeholder={t('appForm.name.placeholder')}
                 error={errors.name?.message}
               />
             )}
@@ -77,11 +77,11 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
             render={({field: {onChange, onBlur, value}}) => (
               <Input
                 isAppForm={true}
-                labelName={t('appForm.labelName.phone')}
+                labelName={t('appForm.phone.label')}
                 onBlur={onBlur}
                 value={value}
                 onChangeText={onChange}
-                placeholder={'+380'}
+                placeholder={t('appForm.phone.placeholder')}
                 error={errors.phone?.message}
               />
             )}
@@ -92,11 +92,11 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
             render={({field: {onChange, onBlur, value}}) => (
               <Input
                 isAppForm={true}
-                labelName={t('appForm.labelName.email')}
+                labelName={t('appForm.email.label')}
                 onBlur={onBlur}
                 value={value}
                 onChangeText={onChange}
-                placeholder={'Введіть свою пошту'}
+                placeholder={t('appForm.email.placeholder')}
                 error={errors.email?.message}
               />
             )}
@@ -107,12 +107,12 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
             render={({field: {onChange, onBlur, value}}) => (
               <Input
                 isAppForm={true}
-                labelName={t('appForm.labelName.comment')}
+                labelName={t('appForm.comment.label')}
                 onBlur={onBlur}
                 value={value}
                 onChangeText={onChange}
-                placeholder={'Залиште свій коментар'}
-                numberOfLines={6}
+                placeholder={t('appForm.comment.placeholder')}
+                numberOfLines={5}
                 additionalContainerStyle={styles.comment}
                 error={errors.email?.message}
               />
@@ -120,7 +120,7 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
           />
           <DefaultBtn
             onPress={handleSubmit(onSubmit)}
-            text={'Відправити'}
+            text={t('common.buttons.appForm')}
             disabled={!isDirty || !isValid}
           />
         </>
@@ -137,13 +137,15 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
             </TouchableOpacity>
           </View>
           <View style={styles.successContainer}>
-            <Text style={styles.titleForm}>Дякуємо за заявку!</Text>
+            <Text style={styles.titleForm}>{t('appForm.success.title')}</Text>
             <Text style={styles.subtitleForm}>
-              Вітаємо! Ти на крок ближче до того щоб завести собі пухнастого
-              друга. Ми скоро зв'яжемося з тобою.
+              {t('appForm.success.subtitle')}
             </Text>
           </View>
-          <DefaultBtn onPress={onClose} text={'Окей'} />
+          <DefaultBtn
+            onPress={onClose}
+            text={t('common.buttons.appFormSuccess')}
+          />
         </>
       )}
     </View>
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
     paddingRight: 25,
     gap: 20,
   },
-  modalContainerSuccess: {height: 300},
+  modalContainerSuccess: {maxHeight: 300, gap: 0},
   headerFormContainer: {
     flexDirection: 'row',
   },

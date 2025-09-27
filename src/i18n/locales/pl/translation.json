@@ -2,7 +2,9 @@
   "common": {
     "searchPlaceHolder": "Szukaj",
     "buttons": {
-      "petPage": "Adoptuj"
+      "petPage": "Adoptuj",
+      "appForm": "Wyślij",
+      "appFormSuccess": "Okej"
     }
   },
   "auth": {},
@@ -17,11 +19,25 @@
   "appForm": {
     "title": "Adoptuj zwierzaka",
     "subtitle": "Zostaw swoje dane, a skontaktujemy się z Tobą",
-    "labelName": {
-      "name": "Imię",
-      "phone": "Telefon",
-      "email": "E-mail",
-      "comment": "Komentarz"
+    "name": {
+      "label": "Imię",
+      "placeholder": "Wprowadź swoje imię"
+    },
+    "phone": {
+      "label": "Telefon",
+      "placeholder": "+48"
+    },
+    "email": {
+      "label": "E-mail",
+      "placeholder": "Wprowadź swój e-mail"
+    },
+    "comment": {
+      "label": "Komentarz",
+      "placeholder": "Zostaw swój komentarz"
+    },
+    "success": {
+      "title": "Dziękujemy za zgłoszenie!",
+      "subtitle": "Gratulujemy! Jesteś o krok bliżej do posiadania futrzanego przyjaciela. Skontaktujemy się z Tobą wkrótce."
     }
   },
   "navigation": {
