@@ -4,12 +4,35 @@
     "buttons": {
       "petPage": "Подарувати сім’ю",
       "appForm": "Відправити",
-      "appFormSuccess": "Окей"
+      "appFormSuccess": "Окей",
+      "filter": "Показати варіанти"
+    },
+    "headers": {
+      "filters": "Фільтри",
+      "lngSettings": ""
     }
   },
   "auth": {},
   "home": {},
-  "filter": {},
+  "filter": {
+    "date": "Сортувати за датою додавання",
+    "species": {
+      "dogs": "Собаки",
+      "cats": "Коти"
+    },
+    "sex": {
+      "male": "Хлопець",
+      "female": "Дівчина",
+      "any": "Будь-хто"
+    },
+    "sizes": {
+      "small": "Маленькі",
+      "medium": "Середні",
+      "big": "Великі"
+    },
+    "age": "Вік, роки",
+    "vaccination": "Вакцинація"
+  },
   "petPage": {
     "characters": "Характеристики:",
     "vaccinated": "Вакцинований",

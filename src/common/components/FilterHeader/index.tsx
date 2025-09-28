@@ -4,9 +4,15 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LoggedInStackType} from '../../../navigation/types';
 import {fonts} from '../../../constants/fonts';
+import {useTranslation} from 'react-i18next';
 
-export default function FilterHeader({title = 'Фільтри'}) {
+type FilterHeaderProps = {
+  title: string;
+};
+
+export default function FilterHeader({title}: FilterHeaderProps) {
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
+  const {t} = useTranslation();
   return (
     <View style={styles.wrapper}>
       <TouchableOpacity
@@ -16,7 +22,7 @@ export default function FilterHeader({title = 'Фільтри'}) {
         <ArrowIcon width={20} height={20} />
       </TouchableOpacity>
       <Text style={[styles.title, title !== 'Фільтри' && styles.titleLng]}>
-        {title}
+        {t(title)}
       </Text>
     </View>
   );

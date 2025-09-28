@@ -4,12 +4,35 @@
     "buttons": {
       "petPage": "Give a home",
       "appForm": "Submit",
-      "appFormSuccess": "Okay"
+      "appFormSuccess": "Okay",
+      "filter": "Show results"
+    },
+    "headers": {
+      "filters": "Filters",
+      "lngSettings": ""
     }
   },
   "auth": {},
   "home": {},
-  "filter": {},
+  "filter": {
+    "date": "Sort by date added",
+    "species": {
+      "dogs": "Dogs",
+      "cats": "Cats"
+    },
+    "sex": {
+      "male": "Male",
+      "female": "Female",
+      "any": "Anyone"
+    },
+    "sizes": {
+      "small": "Small",
+      "medium": "Medium",
+      "big": "Big"
+    },
+    "age": "Age, years",
+    "vaccination": "Vaccination"
+  },
   "petPage": {
     "characters": "Characteristics",
     "vaccinated": "Vaccinated",

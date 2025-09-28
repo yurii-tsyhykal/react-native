@@ -4,12 +4,35 @@
     "buttons": {
       "petPage": "Adoptuj",
       "appForm": "Wyślij",
-      "appFormSuccess": "Okej"
+      "appFormSuccess": "Okej",
+      "filter": "Pokaż wyniki"
+    },
+    "headers": {
+      "filters": "Filtry",
+      "lngSettings": ""
     }
   },
   "auth": {},
   "home": {},
-  "filter": {},
+  "filter": {
+    "date": "Sortuj według daty dodania",
+    "species": {
+      "dogs": "Psy",
+      "cats": "Koty"
+    },
+    "sex": {
+      "male": "Samiec",
+      "female": "Samica",
+      "any": "Dowolna"
+    },
+    "sizes": {
+      "small": "Małe",
+      "medium": "Średnie",
+      "big": "Duże"
+    },
+    "age": "Wiek, lata",
+    "vaccination": "Szczepienie"
+  },
   "petPage": {
     "characters": "Charakterystyka",
     "vaccinated": "Zaszczepiony",

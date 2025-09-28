@@ -4,10 +4,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18next from 'i18next';
 import {initReactI18next} from 'react-i18next';
 
-console.log('--- Debug: Loaded UK resources object ---');
-console.log(JSON.stringify(uk.petPage, null, 2)); // Виводимо лише частину, щоб не забивати консоль
-console.log('--- End Debug ---');
-
 const resources = {
   uk: {
     translation: uk,
@@ -59,7 +55,7 @@ i18next
     resources,
     fallbackLng: 'en',
     debug: __DEV__,
-    lng: 'pl',
+    lng: 'en',
     interpolation: {
       escapeValue: false,
     },
