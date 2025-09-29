@@ -2,8 +2,8 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {CheckIcon, ENIcon, PLIcon, UKIcon} from '../../assets/icons';
 import FilterHeader from '../../common/components/FilterHeader';
 import {useState} from 'react';
-import {i18n} from '../../i18n';
 import {fonts} from '../../constants/fonts';
+import {useTranslation} from 'react-i18next';
 
 const languages = [
   {code: 'pl', icon: <PLIcon />, text: 'Polska'},
@@ -12,6 +12,7 @@ const languages = [
 ];
 
 export default function LanguagesPage() {
+  const {t, i18n} = useTranslation();
   const [selected, setSelected] = useState(i18n.language);
   const selectLanguage = (code: string) => {
     i18n.changeLanguage(code);
@@ -19,7 +20,7 @@ export default function LanguagesPage() {
   };
   return (
     <View>
-      <FilterHeader title={'Налаштування мови'} />
+      <FilterHeader title={t('common.headers.lngSettings')} variant="language" />
       <View style={styles.lngsWrapper}>
         {languages.map(i => (
           <TouchableOpacity

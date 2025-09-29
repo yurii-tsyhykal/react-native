@@ -9,11 +9,14 @@ import {ScreenNames} from '../../../constants/screenNames';
 import {useTranslation} from 'react-i18next';
 
 export default function DrawerContent({props}: any) {
-  const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
+  const {navigation} = props;
+  const navigationStack =
+    useNavigation<StackNavigationProp<LoggedInStackType>>();
   const {t} = useTranslation();
 
   const handleToLngPage = () => {
-    navigation.navigate(ScreenNames.LANGUAGES_PAGE);
+    navigation.closeDrawer();
+    navigationStack.navigate(ScreenNames.LANGUAGES_PAGE);
   };
   return (
     <View>

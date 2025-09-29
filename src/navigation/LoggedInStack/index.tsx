@@ -23,7 +23,7 @@ export default function LoggedInStack() {
         <Stack.Screen
           options={{
             headerShown: true,
-            header: () => <FilterHeader title='common.headers.filters' />,
+            header: () => <FilterHeader title="common.headers.filters" />,
           }}
           name={ScreenNames.FILTER_PAGE}
           component={Filter}

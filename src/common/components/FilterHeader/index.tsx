@@ -8,9 +8,13 @@ import {useTranslation} from 'react-i18next';
 
 type FilterHeaderProps = {
   title: string;
+  variant?: string;
 };
 
-export default function FilterHeader({title}: FilterHeaderProps) {
+export default function FilterHeader({
+  title,
+  variant = 'filter',
+}: FilterHeaderProps) {
   const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
   const {t} = useTranslation();
   return (
@@ -21,7 +25,7 @@ export default function FilterHeader({title}: FilterHeaderProps) {
       >
         <ArrowIcon width={20} height={20} />
       </TouchableOpacity>
-      <Text style={[styles.title, title !== 'Фільтри' && styles.titleLng]}>
+      <Text style={[styles.title, variant === 'language' && styles.titleLng]}>
         {t(title)}
       </Text>
     </View>
