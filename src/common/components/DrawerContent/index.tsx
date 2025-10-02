@@ -18,11 +18,16 @@ export default function DrawerContent({props}: any) {
     navigation.closeDrawer();
     navigationStack.navigate(ScreenNames.LANGUAGES_PAGE);
   };
+
+  const handleToWebPage = () => {
+    navigation.closeDrawer();
+    navigationStack.navigate(ScreenNames.WEB_PAGE);
+  };
   return (
     <View>
       <Header isOpenDrawer={true} navigation={props.navigation} />
       <View style={styles.wrapper}>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity onPress={handleToWebPage} style={styles.btn}>
           <Text style={styles.btnText}>{t('drawer.website')}</Text>
           <ArrowIcon />
         </TouchableOpacity>

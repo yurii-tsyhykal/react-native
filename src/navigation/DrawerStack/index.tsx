@@ -9,12 +9,13 @@ import DrawerContent from '../../common/components/DrawerContent';
 const Drawer = createDrawerNavigator<DrawerStackType>();
 
 export default function DrawerStack() {
+  const header = () => <Header />;
   return (
     <Drawer.Navigator
       initialRouteName={ScreenNames.TAB_BAR_STACK}
       drawerContent={props => <DrawerContent props={props} />}
       screenOptions={{
-        header: () => <Header />,
+        header: header,
         drawerPosition: 'right',
         drawerStyle: {
           borderTopLeftRadius: 0,

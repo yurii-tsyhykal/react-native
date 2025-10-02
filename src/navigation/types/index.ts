@@ -9,6 +9,7 @@ export type RootStackNavigation = {
 
 export type LoggedInStackType = {
   DRAWER_STACK: NavigatorScreenParams<DrawerStackType>;
+  WEB_PAGE: undefined;
   LANGUAGES_PAGE: undefined;
   PET_PAGE: {pet: IPets};
   FILTER_PAGE: {

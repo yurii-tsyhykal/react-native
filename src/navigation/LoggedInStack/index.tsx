@@ -8,10 +8,14 @@ import Filter from '../../screen/Filter';
 import FilterHeader from '../../common/components/FilterHeader';
 import PetPage from '../../screen/Pet';
 import LanguagesPage from '../../screen/Languages';
+import WepPage from '../../screen/WebPage';
 
 const Stack = createNativeStackNavigator<LoggedInStackType>();
 
 export default function LoggedInStack() {
+  const filterScreenHeader = () => (
+    <FilterHeader title="common.headers.filters" />
+  );
   return (
     // eslint-disable-next-line react-native/no-inline-styles
     <SafeAreaView style={{flex: 1}}>
@@ -23,7 +27,7 @@ export default function LoggedInStack() {
         <Stack.Screen
           options={{
             headerShown: true,
-            header: () => <FilterHeader title="common.headers.filters" />,
+            header: filterScreenHeader,
           }}
           name={ScreenNames.FILTER_PAGE}
           component={Filter}
@@ -32,6 +36,11 @@ export default function LoggedInStack() {
         <Stack.Screen
           name={ScreenNames.LANGUAGES_PAGE}
           component={LanguagesPage}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name={ScreenNames.WEB_PAGE}
+          component={WepPage}
         />
       </Stack.Navigator>
     </SafeAreaView>

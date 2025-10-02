@@ -10,4 +10,5 @@ export enum ScreenNames {
   FILTER_PAGE = 'FILTER_PAGE',
   PET_PAGE = 'PET_PAGE',
   LANGUAGES_PAGE = 'LANGUAGES_PAGE',
+  WEB_PAGE = 'WEB_PAGE',
 }
