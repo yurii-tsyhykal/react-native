@@ -10,9 +10,19 @@
     "headers": {
       "filters": "Filtry",
       "lngSettings": "Ustawienia języka"
+    },
+    "errorsMess": {
+      "alert_Logout": "Błąd wylogowania",
+      "alert_Logout_Text": "Nie udało się wylogować z konta. Spróbuj ponownie."
     }
   },
-  "auth": {},
+  "auth": {
+    "logoutAlerts": {
+      "logout_text": "Czy na pewno chcesz się wylogować?",
+      "cancel_btn": "Anuluj",
+      "logout_btn": "Wyjdź"
+    }
+  },
   "home": {},
   "filter": {
     "date": "Sortuj według daty dodania",

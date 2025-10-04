@@ -10,10 +10,11 @@ const Drawer = createDrawerNavigator<DrawerStackType>();
 
 export default function DrawerStack() {
   const header = () => <Header />;
+  const drawerContent = (props: any) => <DrawerContent props={props} />;
   return (
     <Drawer.Navigator
       initialRouteName={ScreenNames.TAB_BAR_STACK}
-      drawerContent={props => <DrawerContent props={props} />}
+      drawerContent={props => drawerContent(props)}
       screenOptions={{
         header: header,
         drawerPosition: 'right',

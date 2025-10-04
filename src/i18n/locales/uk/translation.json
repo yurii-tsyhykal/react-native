@@ -10,9 +10,19 @@
     "headers": {
       "filters": "Фільтри",
       "lngSettings": "Налаштування мови"
+    },
+    "errorsMess": {
+      "alert_Logout": "Помилка виходу",
+      "alert_Logout_Text": "Не вдалося вийти з облікового запису. Спробуйте ще раз."
     }
   },
-  "auth": {},
+  "auth": {
+    "logoutAlerts": {
+      "logout_text": "Ви впевнені, що хочете вийти?",
+      "cancel_btn": "Скасувати",
+      "logout_btn": "Вийти"
+    }
+  },
   "home": {},
   "filter": {
     "date": "Сортувати за датою додавання",

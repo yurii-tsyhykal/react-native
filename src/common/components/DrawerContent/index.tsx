@@ -1,12 +1,13 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Header from '../Header';
 import {fonts} from '../../../constants/fonts';
 import {ArrowIcon} from '../../../assets/icons';
-import {useNavigation} from '@react-navigation/native';
+import {CommonActions, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LoggedInStackType} from '../../../navigation/types';
 import {ScreenNames} from '../../../constants/screenNames';
 import {useTranslation} from 'react-i18next';
+import {getAuth, signOut} from '@react-native-firebase/auth';
 
 export default function DrawerContent({props}: any) {
   const {navigation} = props;
@@ -23,6 +24,44 @@ export default function DrawerContent({props}: any) {
     navigation.closeDrawer();
     navigationStack.navigate(ScreenNames.WEB_PAGE);
   };
+
+  const handleLogOut = async () => {
+    try {
+      await signOut(getAuth());
+      navigation.closeDrawer();
+      navigationStack.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: ScreenNames.LOGGED_OUT_STACK}],
+        }),
+      );
+    } catch (error) {
+      console.error('logout error:', error);
+      Alert.alert(
+        t('common.errorsMess.alert_Logout'),
+        t('common.errorsMess.alert_Logout_Text'),
+      );
+    }
+  };
+
+  const confirmLogout = () => {
+    Alert.alert(
+      t('drawer.logOut'),
+      t('auth.logoutAlerts.logout_text'),
+      [
+        {
+          text: t('auth.logoutAlerts.cancel_btn'),
+          style: 'cancel',
+        },
+        {
+          text: t('auth.logoutAlerts.logout_btn'),
+          style: 'destructive',
+          onPress: handleLogOut,
+        },
+      ],
+      {cancelable: true},
+    );
+  };
   return (
     <View>
       <Header isOpenDrawer={true} navigation={props.navigation} />
@@ -35,7 +74,7 @@ export default function DrawerContent({props}: any) {
           <Text style={styles.btnText}>{t('drawer.language')}</Text>
           <ArrowIcon />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={confirmLogout}>
           <Text style={styles.btnText}>{t('drawer.logOut')}</Text>
         </TouchableOpacity>
       </View>
@@ -51,6 +90,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   btnText: {
+    justifyContent: 'center',
+    alignItems: 'center',
     fontFamily: fonts.ComfortaaRegular,
     fontSize: 16,
     color: 'black',

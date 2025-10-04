@@ -30,12 +30,3 @@ export type TabBarStackType = {
 export type DrawerStackType = {
   TAB_BAR_STACK: NavigatorScreenParams<TabBarStackType>;
 };
-
-// const LoggedInStack: DrawerStackType = {
-//   TAB_BAR_STACK: undefined,
-// };
-
-// const LoggedOutStack: LoggedOutStackType = {
-//   LOGIN_PAGE: undefined,
-//   REGISTRATION_PAGE: undefined,
-// };

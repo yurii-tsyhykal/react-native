@@ -10,9 +10,19 @@
     "headers": {
       "filters": "Filters",
       "lngSettings": "Language settings"
+    },
+    "errorsMess": {
+      "alert_Logout": "Logout error",
+      "alert_Logout_Text": "Failed to log out of the account. Please try again."
     }
   },
-  "auth": {},
+  "auth": {
+    "logoutAlerts": {
+      "logout_text": "Are you sure you want to log out?",
+      "cancel_btn": "Cancel",
+      "logout_btn": "Exit"
+    }
+  },
   "home": {},
   "filter": {
     "date": "Sort by date added",
