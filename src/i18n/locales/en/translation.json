@@ -17,6 +17,10 @@
     }
   },
   "auth": {
+    "authHeader": {
+      "title": "Welcome!",
+      "subtitle": "Every furry friend deserves caring owners.\nWe will help you find a friend."
+    },
     "logoutAlerts": {
       "logout_text": "Are you sure you want to log out?",
       "cancel_btn": "Cancel",

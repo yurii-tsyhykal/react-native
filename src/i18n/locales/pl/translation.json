@@ -17,6 +17,10 @@
     }
   },
   "auth": {
+    "authHeader": {
+      "title": "Witaj!",
+      "subtitle": "Każdy futrzak zasługuje na troskliwych właścicieli.\nPomożemy Ci znaleźć przyjaciela."
+    },
     "logoutAlerts": {
       "logout_text": "Czy na pewno chcesz się wylogować?",
       "cancel_btn": "Anuluj",
