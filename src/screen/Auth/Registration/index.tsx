@@ -16,6 +16,7 @@ import {CommonActions, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackNavigation} from '../../../navigation/types';
 import {ScreenNames} from '../../../constants/screenNames';
+import {useTranslation} from 'react-i18next';
 
 export interface IRegistration {
   email: string;
@@ -24,6 +25,7 @@ export interface IRegistration {
 }
 
 export default function Registration() {
+  const {t} = useTranslation();
   const {
     control,
     handleSubmit,
@@ -81,7 +83,7 @@ export default function Registration() {
               onBlur={onBlur}
               value={value}
               onChangeText={onChange}
-              placeholder="Email"
+              placeholder={t('auth.authForms.email_placeholder')}
               error={errors.email?.message}
             />
           )}
@@ -94,7 +96,7 @@ export default function Registration() {
               onBlur={onBlur}
               value={value}
               onChangeText={onChange}
-              placeholder="Password"
+              placeholder={t('auth.authForms.pwd_placeholder')}
               secureTextEntry={true}
               error={errors.password?.message}
             />
@@ -109,7 +111,7 @@ export default function Registration() {
               onBlur={onBlur}
               value={value}
               onChangeText={onChange}
-              placeholder="Confirm Password"
+              placeholder={t('auth.authForms.confirm_pwd_placeholder')}
               secureTextEntry={true}
               error={errors.confirmPassword?.message}
             />
@@ -118,7 +120,7 @@ export default function Registration() {
         />
         <DefaultBtn
           onPress={handleSubmit(onSubmit)}
-          text="Зареєструватись"
+          text={t('common.buttons.registration')}
           disabled={!isDirty || !isValid}
         />
       </View>

@@ -5,7 +5,9 @@
       "petPage": "Give a home",
       "appForm": "Submit",
       "appFormSuccess": "Okay",
-      "filter": "Show results"
+      "filter": "Show results",
+      "login": "Log in",
+      "registration": "Sign up"
     },
     "headers": {
       "filters": "Filters",
@@ -19,7 +21,14 @@
   "auth": {
     "authHeader": {
       "title": "Welcome!",
-      "subtitle": "Every furry friend deserves caring owners.\nWe will help you find a friend."
+      "subtitle": "Every furry friend deserves caring owners.\nWe will help you find a friend.",
+      "login_tab": "Login",
+      "registration_tab": "Sign up"
+    },
+    "authForms": {
+      "email_placeholder": "Email",
+      "pwd_placeholder": "Password",
+      "confirm_pwd_placeholder": "Confirm password"
     },
     "logoutAlerts": {
       "logout_text": "Are you sure you want to log out?",

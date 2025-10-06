@@ -35,7 +35,7 @@ export default function AuthHeader({activeTab}: IAuthHeader) {
           onPress={navigateToLogin}
           style={activeTab === 'login' ? styles.activeTab : styles.disabledTab}
         >
-          <Text style={styles.authText}>Вхід</Text>
+          <Text style={styles.authText}>{t('auth.authHeader.login_tab')}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={navigateToRegistration}
@@ -43,7 +43,9 @@ export default function AuthHeader({activeTab}: IAuthHeader) {
             activeTab === 'Registration' ? styles.activeTab : styles.disabledTab
           }
         >
-          <Text style={styles.authText}>Реєстрація</Text>
+          <Text style={styles.authText}>
+            {t('auth.authHeader.registration_tab')}
+          </Text>
         </TouchableOpacity>
       </View>
     </>

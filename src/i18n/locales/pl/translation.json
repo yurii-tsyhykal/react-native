@@ -5,7 +5,9 @@
       "petPage": "Adoptuj",
       "appForm": "Wyślij",
       "appFormSuccess": "Okej",
-      "filter": "Pokaż wyniki"
+      "filter": "Pokaż wyniki",
+      "login": "Zaloguj się",
+      "registration": "Zarejestruj się"
     },
     "headers": {
       "filters": "Filtry",
@@ -19,7 +21,14 @@
   "auth": {
     "authHeader": {
       "title": "Witaj!",
-      "subtitle": "Każdy futrzak zasługuje na troskliwych właścicieli.\nPomożemy Ci znaleźć przyjaciela."
+      "subtitle": "Każdy futrzak zasługuje na troskliwych właścicieli.\nPomożemy Ci znaleźć przyjaciela.",
+      "login_tab": "Logowanie",
+      "registration_tab": "Rejestracja"
+    },
+    "authForms": {
+      "email_placeholder": "E-mail",
+      "pwd_placeholder": "Hasło",
+      "confirm_pwd_placeholder": "Potwierdź hasło"
     },
     "logoutAlerts": {
       "logout_text": "Czy na pewno chcesz się wylogować?",

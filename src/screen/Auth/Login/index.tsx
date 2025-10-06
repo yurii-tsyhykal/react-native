@@ -14,6 +14,7 @@ import {ScreenNames} from '../../../constants/screenNames';
 import {CommonActions, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackNavigation} from '../../../navigation/types';
+import {useTranslation} from 'react-i18next';
 
 interface InputValue {
   email: string;
@@ -29,6 +30,8 @@ export default function LoginPage() {
     errorEmail: null,
     errorPassword: null,
   });
+
+  const {t} = useTranslation();
 
   const handleChangeInput = (
     key: 'email' | 'password' | 'errorEmail' | 'errorPassword',
@@ -91,14 +94,14 @@ export default function LoginPage() {
       <AuthHeader activeTab="login" />
       <View style={styles.formContainer}>
         <Input
-          placeholder="Email"
+          placeholder={t('auth.authForms.email_placeholder')}
           onBlur={checkEmail}
           value={inputValues.email}
           onChangeText={text => handleChangeInput('email', text)}
           error={inputValues.errorEmail}
         />
         <Input
-          placeholder="Password"
+          placeholder={t('auth.authForms.pwd_placeholder')}
           value={inputValues.password}
           onChangeText={text => {
             handleChangeInput('password', text);
@@ -113,7 +116,7 @@ export default function LoginPage() {
           onLogin(inputValues.email, inputValues.password);
         }}
         disabled={isDisabledActiveTab}
-        text="Увійти"
+        text={t('common.buttons.login')}
       />
     </AuthLayout>
   );

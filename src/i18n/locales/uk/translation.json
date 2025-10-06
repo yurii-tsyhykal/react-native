@@ -5,7 +5,9 @@
       "petPage": "Подарувати сім’ю",
       "appForm": "Відправити",
       "appFormSuccess": "Окей",
-      "filter": "Показати варіанти"
+      "filter": "Показати варіанти",
+      "login": "Увійти",
+      "registration": "Зареєструватись"
     },
     "headers": {
       "filters": "Фільтри",
@@ -19,7 +21,14 @@
   "auth": {
     "authHeader": {
       "title": "Раді тебе вітати!",
-      "subtitle": "Koжен пухнастик заслуговує на дбайливих господарів.\nМи допоможемо тобі знайти друга."
+      "subtitle": "Koжен пухнастик заслуговує на дбайливих господарів.\nМи допоможемо тобі знайти друга.",
+      "login_tab": "Вхід",
+      "registration_tab": "Реєстрація"
+    },
+    "authForms": {
+      "email_placeholder": "Електронна пошта",
+      "pwd_placeholder": "Пароль",
+      "confirm_pwd_placeholder": "Підтвердіть пароль"
     },
     "logoutAlerts": {
       "logout_text": "Ви впевнені, що хочете вийти?",
