@@ -96,5 +96,16 @@
     "website": "Our website",
     "language": "Language settings",
     "logOut": "Logout"
+  },
+  "validation": {
+    "password": {
+      "min": "At least 8 characters",
+      "max": "Max 50 characters",
+      "required": "Password is required"
+    },
+    "confirmPassword": {
+      "match": "Passwords must match",
+      "required": "Confirm password is required"
+    }
   }
 }

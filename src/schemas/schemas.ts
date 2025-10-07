@@ -21,6 +21,9 @@ import {
   PHONE_REGEX_ERROR_MESSAGE,
   PHONE_REQUIRED,
 } from '../constants/messages';
+import {i18n} from '../i18n';
+
+const t = (key: string) => i18n.t(key);
 
 const emailYup = Yup.string()
   .trim()
@@ -31,15 +34,15 @@ const emailYup = Yup.string()
 export const registerSchema = Yup.object({
   email: emailYup,
   password: Yup.string()
-    .min(8, PASSWORD_MIN_ERROR_MESSAGE)
-    .max(50, MAX_ERROR_MESSAGE)
+    .min(8, () => t('validation.password.min'))
+    .max(50, () => t('validation.password.max'))
     .matches(PASSWORD_REGEX, {
-      message: PASSWORD_MIN_ERROR_MESSAGE,
+      message: () => t('validation.password.min'),
     })
-    .required(PASSWORD_REQUIRED),
+    .required(() => t('validation.password.required')),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], PASSWORD_MATCH)
-    .required(CONFIRM_PASSWORD),
+    .oneOf([Yup.ref('password')], () => t('validation.confirmPassword.match'))
+    .required(() => t('validation.confirmPassword.required')),
 });
 
 export const applicationSchema = Yup.object({

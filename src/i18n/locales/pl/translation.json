@@ -96,5 +96,16 @@
     "website": "Nasza strona internetowa",
     "language": "Ustawienia języka",
     "logOut": "Wyloguj się"
+  },
+  "validation": {
+    "password": {
+      "min": "Co najmniej 8 znaków",
+      "max": "Maksymalnie 50 znaków",
+      "required": "Hasło jest wymagane"
+    },
+    "confirmPassword": {
+      "match": "Hasła muszą się zgadzać",
+      "required": "Potwierdzenie hasła jest wymagane"
+    }
   }
 }
