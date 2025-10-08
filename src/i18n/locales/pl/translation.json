@@ -98,14 +98,30 @@
     "logOut": "Wyloguj się"
   },
   "validation": {
+    "max": "Maksymalnie 50 znaków",
     "password": {
       "min": "Co najmniej 8 znaków",
-      "max": "Maksymalnie 50 znaków",
       "required": "Hasło jest wymagane"
     },
     "confirmPassword": {
       "match": "Hasła muszą się zgadzać",
       "required": "Potwierdzenie hasła jest wymagane"
+    },
+    "name": {
+      "required": "Imię jest wymagane",
+      "min": "Co najmniej 2 znaki",
+      "valid": "Wprowadź prawidłowe imię"
+    },
+    "phone": {
+      "required": "Numer telefonu jest wymagany",
+      "valid": "Użyj formatu: +48XXXXXXXXX"
+    },
+    "email": {
+      "required": "Adres e-mail jest wymagany",
+      "format": "Użyj formatu: example@test.com"
+    },
+    "comment": {
+      "valid": "Wprowadź prawidłowe znaki"
     }
   }
 }

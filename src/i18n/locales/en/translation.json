@@ -98,14 +98,30 @@
     "logOut": "Logout"
   },
   "validation": {
+    "max": "Max 50 characters",
     "password": {
       "min": "At least 8 characters",
-      "max": "Max 50 characters",
       "required": "Password is required"
     },
     "confirmPassword": {
       "match": "Passwords must match",
       "required": "Confirm password is required"
+    },
+    "name": {
+      "required": "Name is required",
+      "min": "At least 2 characters",
+      "valid": "Enter a valid name"
+    },
+    "phone": {
+      "required": "Phone is required",
+      "valid": "Use the format: +X(XXX)XXX-XXXX"
+    },
+    "email": {
+      "required": "Email is required",
+      "format": "Use the format: example@test.com"
+    },
+    "comment": {
+      "valid": "Enter valid characters"
     }
   }
 }

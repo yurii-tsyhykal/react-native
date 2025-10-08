@@ -3,7 +3,9 @@ import {fonts} from '../../../constants/fonts';
 import {CloseIcon, DogImage} from '../../../assets/icons';
 import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {applicationSchema} from '../../../schemas/schemas';
+import {
+  getApplicationSchema,
+} from '../../../schemas/schemas';
 import Input from '../Input';
 import DefaultBtn from '../DefaultBtn';
 import {useState} from 'react';
@@ -30,7 +32,7 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
     formState: {errors, isDirty, isValid},
   } = useForm<IAppForm>({
     defaultValues: {name: '', phone: '', email: '', comment: ''},
-    resolver: yupResolver(applicationSchema),
+    resolver: yupResolver(getApplicationSchema()),
     mode: 'onTouched',
   });
 
