@@ -116,7 +116,7 @@ export default function ApplicationForm({onClose}: IAppFormProps) {
                 placeholder={t('appForm.comment.placeholder')}
                 numberOfLines={5}
                 additionalContainerStyle={styles.comment}
-                error={errors.email?.message}
+                error={errors.comment?.message}
               />
             )}
           />

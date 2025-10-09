@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {View} from 'react-native';
 import DefaultBtn from '../../../common/components/DefaultBtn';
 import Input from '../../../common/components/Input';
@@ -6,7 +6,6 @@ import styles from '../styles';
 import AuthLayout from '../components/AuthLayout';
 import AuthHeader from '../components/AuthHeader';
 import {
-  getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from '@react-native-firebase/auth';
@@ -15,66 +14,50 @@ import {CommonActions, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackNavigation} from '../../../navigation/types';
 import {useTranslation} from 'react-i18next';
+import {Controller, useForm} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {loginSchema} from '../../../schemas/schemas';
+import {authInstance} from '../../../config/firebaseConfig';
 
-interface InputValue {
+interface ILogin {
   email: string;
   password: string;
-  errorEmail: null | string;
-  errorPassword: null | string;
 }
 
 export default function LoginPage() {
-  const [inputValues, setInputValues] = useState<InputValue>({
-    email: '',
-    password: '',
-    errorEmail: null,
-    errorPassword: null,
-  });
-
   const {t} = useTranslation();
-
-  const handleChangeInput = (
-    key: 'email' | 'password' | 'errorEmail' | 'errorPassword',
-    value: string | null,
-  ) => {
-    setInputValues(prev => ({...prev, [key]: value}));
-  };
-
-  const checkEmail = () => {
-    const emailValidator = new RegExp(
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,
-    );
-    if (!emailValidator.test(inputValues.email)) {
-      handleChangeInput('errorEmail', 'Not valid email');
-    } else {
-      handleChangeInput('errorEmail', null);
-    }
-  };
-
-  const checkPassword = (text: string) => {
-    if (text.length < 8) {
-      handleChangeInput('errorPassword', 'Too short password');
-    } else {
-      handleChangeInput('errorPassword', null);
-    }
-  };
-
-  const isDisabledActiveTab = Boolean(
-    inputValues.errorEmail ||
-      inputValues.errorPassword ||
-      !inputValues.email ||
-      !inputValues.password,
-  );
+  const {
+    control,
+    handleSubmit,
+    formState: {errors, isDirty, isValid},
+  } = useForm<ILogin>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    resolver: yupResolver(loginSchema),
+    mode: 'onTouched',
+  });
 
   const navigation = useNavigation<StackNavigationProp<RootStackNavigation>>();
 
-  const onLogin = async (email: string, password: string) => {
-    const {user} = await signInWithEmailAndPassword(getAuth(), email, password);
-    console.log(user);
+  const onLogin = async (data: ILogin) => {
+    console.log('start');
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        authInstance,
+        data.email,
+        data.password,
+      );
+      console.log('User UID:', userCredential.user.uid);
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
   useEffect(() => {
-    const subscriber = onAuthStateChanged(getAuth(), user => {
+    const subscriber = onAuthStateChanged(authInstance, user => {
       if (user) {
         console.log('user is signed in');
         navigation.dispatch(
@@ -93,29 +76,37 @@ export default function LoginPage() {
     <AuthLayout>
       <AuthHeader activeTab="login" />
       <View style={styles.formContainer}>
-        <Input
-          placeholder={t('auth.authForms.email_placeholder')}
-          onBlur={checkEmail}
-          value={inputValues.email}
-          onChangeText={text => handleChangeInput('email', text)}
-          error={inputValues.errorEmail}
+        <Controller
+          control={control}
+          render={({field: {onBlur, onChange, value}}) => (
+            <Input
+              onBlur={onBlur}
+              value={value}
+              onChangeText={onChange}
+              placeholder={t('auth.authForms.email_placeholder')}
+              error={errors.email?.message}
+            />
+          )}
+          name="email"
         />
-        <Input
-          placeholder={t('auth.authForms.pwd_placeholder')}
-          value={inputValues.password}
-          onChangeText={text => {
-            handleChangeInput('password', text);
-            checkPassword(text);
-          }}
-          secureTextEntry={true}
-          error={inputValues.errorPassword && inputValues.errorPassword}
+        <Controller
+          control={control}
+          render={({field: {onBlur, onChange, value}}) => (
+            <Input
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder={t('auth.authForms.pwd_placeholder')}
+              secureTextEntry={true}
+              error={errors.password?.message}
+            />
+          )}
+          name="password"
         />
       </View>
       <DefaultBtn
-        onPress={() => {
-          onLogin(inputValues.email, inputValues.password);
-        }}
-        disabled={isDisabledActiveTab}
+        onPress={handleSubmit(onLogin)}
+        disabled={!isDirty || !isValid}
         text={t('common.buttons.login')}
       />
     </AuthLayout>

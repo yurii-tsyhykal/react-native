@@ -5,10 +5,6 @@ import {
   NAME_REGEX,
   PASSWORD_REGEX,
 } from '../constants/regexes';
-import {
-  COMMENT_REGEX_ERROR_MESSAGE,
-  MAX_ERROR_MESSAGE,
-} from '../constants/messages';
 import {i18n} from '../i18n';
 
 const t = (key: string) => i18n.t(key);
@@ -19,18 +15,25 @@ const emailYup = Yup.string()
   .max(50, () => t('validation.max'))
   .matches(EMAIL_REGEX, () => t('validation.email.format'));
 
+const passwordYup = Yup.string()
+  .min(8, () => t('validation.password.min'))
+  .max(50, () => t('validation.max'))
+  .matches(PASSWORD_REGEX, {
+    message: () => t('validation.password.min'),
+  })
+  .required(() => t('validation.password.required'));
+
 export const registerSchema = Yup.object({
   email: emailYup,
-  password: Yup.string()
-    .min(8, () => t('validation.password.min'))
-    .max(50, () => t('validation.max'))
-    .matches(PASSWORD_REGEX, {
-      message: () => t('validation.password.min'),
-    })
-    .required(() => t('validation.password.required')),
+  password: passwordYup,
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password')], () => t('validation.confirmPassword.match'))
     .required(() => t('validation.confirmPassword.required')),
+});
+
+export const loginSchema = Yup.object({
+  email: emailYup,
+  password: passwordYup,
 });
 
 export const getApplicationSchema = () => {
