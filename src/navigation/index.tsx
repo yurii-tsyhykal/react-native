@@ -12,6 +12,7 @@ const Stack = createNativeStackNavigator<RootStackNavigation>();
 
 export default function RootNavigation() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
   useEffect(() => {
     const subscriber = onAuthStateChanged(getAuth(), user => {
       setIsAuthenticated(!!user);

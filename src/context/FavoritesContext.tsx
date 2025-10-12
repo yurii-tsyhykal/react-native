@@ -9,6 +9,7 @@ import {
 } from 'react';
 import {IPets} from '../screen/Home';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {authInstance} from '../config/firebaseConfig';
 
 interface FavoritesContextType {
   favorites: IPets[];
@@ -22,13 +23,32 @@ const FavoritesContext = createContext<FavoritesContextType | null>(null);
 export const FavoriteProvider = ({children}: {children: ReactNode}) => {
   const [favorites, setFavorites] = useState<IPets[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [userId, setUserId] = useState<string | null>(null);
+
+  const getFavKey = useCallback((key: string) => `favorites_${key}`, []);
+
+  useEffect(() => {
+    const unsubscribe = authInstance.onAuthStateChanged(user => {
+      setUserId(user?.uid || null);
+    });
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     const getFavorites = async () => {
+      setIsLoading(true);
+      if (!userId) {
+        setFavorites([]);
+        setIsLoading(false);
+        return;
+      }
       try {
-        const storedFavorites = await AsyncStorage.getItem('favorites');
+        const key = getFavKey(userId);
+        const storedFavorites = await AsyncStorage.getItem(key);
         if (storedFavorites) {
           setFavorites(JSON.parse(storedFavorites));
+        } else {
+          setFavorites([]);
         }
       } catch (error) {
         console.log('Failed load favorites', error);
@@ -37,21 +57,28 @@ export const FavoriteProvider = ({children}: {children: ReactNode}) => {
       }
     };
     getFavorites();
-  }, []);
+  }, [getFavKey, userId]);
 
-  const toggleFavorite = useCallback(async (pet: IPets) => {
-    setFavorites(currentFav => {
-      let newFav;
-      const isFav = currentFav.some(i => i.timeStamp === pet.timeStamp);
-      if (isFav) {
-        newFav = currentFav.filter(i => i.timeStamp !== pet.timeStamp);
-      } else {
-        newFav = [...currentFav, pet];
+  const toggleFavorite = useCallback(
+    async (pet: IPets) => {
+      if (!userId) {
+        return;
       }
-      AsyncStorage.setItem('favorites', JSON.stringify(newFav));
-      return newFav;
-    });
-  }, []);
+      setFavorites(currentFav => {
+        let newFav;
+        const isFav = currentFav.some(i => i.timeStamp === pet.timeStamp);
+        if (isFav) {
+          newFav = currentFav.filter(i => i.timeStamp !== pet.timeStamp);
+        } else {
+          newFav = [...currentFav, pet];
+        }
+        const key = getFavKey(userId);
+        AsyncStorage.setItem(key, JSON.stringify(newFav));
+        return newFav;
+      });
+    },
+    [getFavKey, userId],
+  );
 
   const isFavorite = useCallback(
     (pet: IPets) => {

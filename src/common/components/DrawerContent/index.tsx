@@ -2,12 +2,13 @@ import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Header from '../Header';
 import {fonts} from '../../../constants/fonts';
 import {ArrowIcon} from '../../../assets/icons';
-import {CommonActions, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LoggedInStackType} from '../../../navigation/types';
 import {ScreenNames} from '../../../constants/screenNames';
 import {useTranslation} from 'react-i18next';
-import {getAuth, signOut} from '@react-native-firebase/auth';
+import {signOut} from '@react-native-firebase/auth';
+import {authInstance} from '../../../config/firebaseConfig';
 
 export default function DrawerContent({props}: any) {
   const {navigation} = props;
@@ -27,14 +28,8 @@ export default function DrawerContent({props}: any) {
 
   const handleLogOut = async () => {
     try {
-      await signOut(getAuth());
+      await signOut(authInstance);
       navigation.closeDrawer();
-      navigationStack.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{name: ScreenNames.LOGGED_OUT_STACK}],
-        }),
-      );
     } catch (error) {
       console.error('logout error:', error);
       Alert.alert(
